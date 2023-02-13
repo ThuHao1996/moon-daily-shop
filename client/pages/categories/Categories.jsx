@@ -296,10 +296,14 @@ export default function Categories() {
               <h3 className={styles.block_heading}>Electronic Equipment</h3>
               <ul className={styles.block_list}>
                 <li className={styles.block_item}>
-                  <a href="/shop/ShopDefault">New Arrivals</a>
+                  <a className={styles.block_link} href="/shop/ShopDefault">
+                    New Arrivals
+                  </a>
                 </li>
                 <li className={styles.block_item}>
-                  <a href="/shop/ShopDefault">Best Sellers</a>
+                  <a className={styles.block_link} href="/shop/ShopDefault">
+                    Best Sellers
+                  </a>
                 </li>
               </ul>
             </div>
@@ -418,14 +422,19 @@ export default function Categories() {
           </div>
           <div className={styles.container_block}>
             <div className={styles.block_header}>
-              Household electrical appliances
-              <h3 className={styles.block_heading}></h3>
+              <h3 className={styles.block_heading}>
+                Household electrical appliances
+              </h3>
               <ul className={styles.block_list}>
                 <li className={styles.block_item}>
-                  <a href="/shop/ShopDefault">New Arrivals</a>
+                  <a className={styles.block_link} href="/shop/ShopDefault">
+                    New Arrivals
+                  </a>
                 </li>
                 <li className={styles.block_item}>
-                  <a href="/shop/ShopDefault">Best Sellers</a>
+                  <a className={styles.block_link} href="/shop/ShopDefault">
+                    Best Sellers
+                  </a>
                 </li>
               </ul>
             </div>
@@ -541,10 +550,14 @@ export default function Categories() {
               <h3 className={styles.block_heading}>Beauty Products</h3>
               <ul className={styles.block_list}>
                 <li className={styles.block_item}>
-                  <a href="/shop/ShopDefault">New Arrivals</a>
+                  <a className={styles.block_link} href="/shop/ShopDefault">
+                    New Arrivals
+                  </a>
                 </li>
                 <li className={styles.block_item}>
-                  <a href="/shop/ShopDefault">Best Sellers</a>
+                  <a className={styles.block_link} href="/shop/ShopDefault">
+                    Best Sellers
+                  </a>
                 </li>
               </ul>
             </div>

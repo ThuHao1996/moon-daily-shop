@@ -177,7 +177,10 @@ export default function Navbar() {
                     </ul>
                   </li>
                   <li className={styles.menu_item}>
-                    <a className={styles.menu_heading} href="">
+                    <a
+                      className={styles.menu_heading}
+                      href="/products/Products"
+                    >
                       PRODUCTS
                       <i
                         className="fa-solid fa-chevron-down"

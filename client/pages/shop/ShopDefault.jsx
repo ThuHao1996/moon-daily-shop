@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import Head from "next/head";
 import styles from "./ShopDefault.module.css";
 import Image from "next/image";
-import img from "./images/may giat.jpeg";
-import img1 from "./images/sonsale.jpeg";
-import img2 from "./images/maygiat.png";
+import img from "./images/maygiat.png";
+import img1 from "./images/tulanh.jpg";
+import img2 from "./images/son.jpg";
 import img3 from "./images/Dior.jpg";
 import img4 from "./images/samsung.webp";
 import img5 from "./images/apple.png";
@@ -29,6 +29,15 @@ import img22 from "../../components/product/img/blockui7.5.jpg";
 import img23 from "../../components/product/img/blockui7.6.jpg";
 
 export default function ShopDefault() {
+  const toggleCarousel = (action) => {
+    const { Carousel } = require("bootstrap");
+    const carousel = new Carousel("#demo");
+    if (action === "next") {
+      carousel.next();
+    } else {
+      carousel.prev();
+    }
+  };
   return (
     <>
       <Head>
@@ -48,27 +57,14 @@ export default function ShopDefault() {
         <div className={styles.shop_container}>
           <div className={styles.shop_banner}>
             <div id="demo" className="carousel slide" data-ride="carousel">
-              <ul className="carousel-indicators">
-                <li
-                  data-target="#demo"
-                  data-slide-to="0"
-                  className="active"
-                ></li>
-                <li data-target="#demo" data-slide-to="1"></li>
-                <li data-target="#demo" data-slide-to="2"></li>
-              </ul>
+              {/* <ul className="carousel-indicators">
+                <li data-slide-to="0" className="active"></li>
+                <li data-slide-to="1"></li>
+                <li data-slide-to="2"></li>
+              </ul> */}
 
               <div className="carousel-inner">
                 <div className="carousel-item active">
-                  <Image
-                    className={styles.img_name}
-                    src={img2}
-                    alt=""
-                    width={1650}
-                    height={470}
-                  />
-                </div>
-                <div className="carousel-item">
                   <Image
                     className={styles.img_name}
                     src={img}
@@ -86,12 +82,22 @@ export default function ShopDefault() {
                     height={470}
                   />
                 </div>
+                <div className="carousel-item">
+                  <Image
+                    className={styles.img_name}
+                    src={img2}
+                    alt=""
+                    width={1650}
+                    height={470}
+                  />
+                </div>
               </div>
 
               <a
                 className="carousel-control-prev"
                 href="#demo"
                 data-slide="prev"
+                onClick={() => toggleCarousel("prev")}
               >
                 <span
                   className="carousel-control-prev-icon"
@@ -106,6 +112,7 @@ export default function ShopDefault() {
                 className="carousel-control-next"
                 href="#demo"
                 data-slide="next"
+                onClick={() => toggleCarousel("next")}
               >
                 <span
                   className="carousel-control-next-icon"
@@ -423,7 +430,7 @@ export default function ShopDefault() {
                   </li>
                   <li className={styles.group_item}>
                     <a className={styles.links_item} href="/shop/ShopDefault">
-                      Hotels & Motels{" "}
+                      Hotels & Motels
                     </a>
                   </li>
                   <li className={styles.group_item}>

@@ -11,6 +11,16 @@ import img2 from "./homepage/images/sofa.jpeg";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  const toggleCarousel = (action) => {
+    const { Carousel } = require("bootstrap");
+    const carousel = new Carousel("#demo");
+    if (action === "next") {
+      carousel.next();
+    } else {
+      carousel.prev();
+    }
+  };
+
   return (
     <>
       <Head>
@@ -21,59 +31,6 @@ export default function Home() {
         <div className={styles.home_banner}>
           <div className={styles.banner_container}>
             <div className={styles.banner_left}>
-              {/* <div
-            id="carouselExampleFade"
-            className="carousel slide carousel-fade"
-            data-bs-ride="carousel"
-          >
-            <div className="carousel-inner">
-              <div className="carousel-item active">
-                <Image
-                  src={img}
-                  className="d-block w-100"
-                  alt="dieuhoa"
-                ></Image>
-              </div>
-              <div className="carousel-item">
-                <Image
-                  src={img1}
-                  className="d-block w-100"
-                  alt="tulanh"
-                ></Image>
-              </div>
-              <div className="carousel-item">
-                <Image
-                  src={img2}
-                  className="d-block w-100"
-                  alt="sofa"
-                ></Image>
-              </div>
-            </div>
-            <button
-              className="carousel-control-prev"
-              type="button"
-              data-bs-target="#carouselExampleFade"
-              data-bs-slide="prev"
-            >
-              <span
-                className="carousel-control-prev-icon"
-                aria-hidden="true"
-              ></span>
-              <span className="visually-hidden">Previous</span>
-            </button>
-            <button
-              className="carousel-control-next"
-              type="button"
-              data-bs-target="#carouselExampleFade"
-              data-bs-slide="next"
-            >
-              <span
-                className="carousel-control-next-icon"
-                aria-hidden="true"
-              ></span>
-              <span className="visually-hidden">Next</span>
-            </button>
-          </div> */}
               <div
                 id="carouselExampleCaptions"
                 className="carousel slide"
@@ -103,7 +60,12 @@ export default function Home() {
                 </div>
                 <div className="carousel-inner">
                   <div className="carousel-item active">
-                    <Image src={img} className="d-block w-100" alt="sofa" />
+                    <Image
+                      src={img}
+                      className="d-block"
+                      alt="sofa"
+                      style={{ height: "400px", width: "100%" }}
+                    />
                     <div className="carousel-caption d-none d-md-block">
                       <h5>First slide label</h5>
                       <p>
@@ -113,7 +75,12 @@ export default function Home() {
                     </div>
                   </div>
                   <div className="carousel-item">
-                    <Image src={img1} className="d-block w-100" alt="dieuhoa" />
+                    <Image
+                      src={img1}
+                      className="d-block"
+                      alt="dieuhoa"
+                      style={{ height: "400px", width: "100%" }}
+                    />
                     <div className="carousel-caption d-none d-md-block">
                       <h5>Second slide label</h5>
                       <p>
@@ -123,7 +90,12 @@ export default function Home() {
                     </div>
                   </div>
                   <div className="carousel-item">
-                    <Image src={img2} className="d-block w-100" alt="tulanh" />
+                    <Image
+                      src={img2}
+                      className="d-block"
+                      alt="tulanh"
+                      style={{ height: "400px", width: "100%" }}
+                    />
                     <div className="carousel-caption d-none d-md-block">
                       <h5>Third slide label</h5>
                       <p>
@@ -158,54 +130,6 @@ export default function Home() {
                   <span className="visually-hidden">Next</span>
                 </button>
               </div>
-              {/* <div id="demo" className="carousel slide" data-ride="carousel">
-                <ul className="carousel-indicators">
-                  <li
-                    data-target="#demo"
-                    data-slide-to="0"
-                    className="active"
-                  ></li>
-                  <li data-target="#demo" data-slide-to="1"></li>
-                  <li data-target="#demo" data-slide-to="2"></li>
-                </ul>
-
-                <div className="carousel-inner">
-                  <div className="carousel-item active">
-                    <Image
-                      src={img}
-                      alt="Los Angeles"
-                      width="1230"
-                      height="450"
-                    />
-                  </div>
-                  <div className="carousel-item">
-                    <Image src={img1} alt="Chicago" width="1230" height="450" />
-                  </div>
-                  <div className="carousel-item">
-                    <Image
-                      src={img2}
-                      alt="New York"
-                      width="1230"
-                      height="450"
-                    />
-                  </div>
-                </div>
-
-                <a
-                  className="carousel-control-prev"
-                  href="#demo"
-                  data-slide="prev"
-                >
-                  <span className="carousel-control-prev-icon"></span>
-                </a>
-                <a
-                  className="carousel-control-next"
-                  href="#demo"
-                  data-slide="next"
-                >
-                  <span className="carousel-control-next-icon"></span>
-                </a>
-              </div> */}
             </div>
             <div className={styles.banner_right}></div>
           </div>

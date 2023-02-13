@@ -146,7 +146,7 @@
   padding-right: 10px;
 }
 
-.block_item:hover {
+.block_link:hover {
   color: green;
 }
 

@@ -136,3 +136,15 @@ export default function Login() {
     </>
   );
 }
+
+export async function getStaticProps(context) {
+  const login = await axiosClient.get("/login");
+
+  return {
+    props: {
+      login,
+    },
+
+    revalidate: 3600,
+  };
+}

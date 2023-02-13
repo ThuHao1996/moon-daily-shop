@@ -1,0 +1,29 @@
+.card {
+  margin: 15px 30px;
+}
+
+.card-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: green;
+  font-weight: 600;
+  font-size: 25px;
+  text-transform: uppercase;
+}
+
+.card-text {
+  height: 70px;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.card-body {
+  background-color: #bef3be;
+}
+
+.card-img-top {
+  height: 250px;
+  width: 100%;
+}

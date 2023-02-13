@@ -100,3 +100,6 @@ a {
     color-scheme: dark;
   }
 }
+
+/* --------products--------------- */
+@import url("./products.css");
