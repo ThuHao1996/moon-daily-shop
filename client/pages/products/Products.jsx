@@ -3,7 +3,7 @@ import React from "react";
 import numeral from "numeral";
 import styles from "./Products.module.css";
 import { axiosClient } from "../../libraries/axiosClient";
-import { API_URL } from "@/constants/URL";
+import { API_URL } from "../../constants/URL";
 
 export default function Products({ products }) {
   const userLink = (id) => {
@@ -44,7 +44,6 @@ export default function Products({ products }) {
         <div className={styles.product_container}>
           {products &&
             products.map((product) => {
-              // console.log(product);
               return (
                 <div key={product._id}>
                   <div className="card" style={{ width: "21rem" }}>

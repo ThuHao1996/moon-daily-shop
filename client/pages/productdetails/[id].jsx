@@ -10,7 +10,6 @@ export default function ProductDetails({ product }) {
   // const router = useRouter();
   // const { productId } = router.query;
   // console.log("product", product);
-
   return (
     <>
       <div className="row" style={{ width: "1020px", marginLeft: "50px" }}>
@@ -28,11 +27,10 @@ export default function ProductDetails({ product }) {
           />
           <div className="row mx-0" style={{ cursor: "pointer" }}>
             {product.images.map((img, index) => {
-              console.log(img);
               return (
                 <img
                   key={index}
-                  src={img.url}
+                  src={`${API_URL}/${img}`}
                   alt=""
                   className="img-thumbnail rounded"
                   style={{ width: "20%", height: "80px" }}

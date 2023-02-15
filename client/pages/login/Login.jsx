@@ -1,8 +1,24 @@
 import React from "react";
 import Head from "next/head";
 import styles from "./Login.module.css";
+import { axiosClient } from "../../libraries/axiosClient";
 
 export default function Login() {
+  // const onFinish = (values) => {
+  //   const { username, password } = values;
+  //   axiosClient
+  //     .post("/auth/login-jwt", { username, password })
+  //     .then((response) => {
+  //       //LOGIN OK
+  //       window.location.href = "/";
+  //       console.log(response.data);
+  //     })
+  //     .catch((err) => {
+  //       if (err.response.status === 401) {
+  //         message.error("Đăng nhập không thành công!");
+  //       }
+  //     });
+  // };
   return (
     <>
       <Head>
@@ -19,7 +35,7 @@ export default function Login() {
         </div>
         <div className={styles.my_account}>
           <h1 className={styles.account_heading}>LOGIN</h1>
-          <form className={styles.account_form}>
+          <form className={styles.account_form} onClick={onFinish()}>
             <h2 className={styles.account_name}>Log In Your Account</h2>
             <div className={styles.form}>
               <label
@@ -35,6 +51,7 @@ export default function Login() {
               </label>
               <input
                 type="email"
+                name="username"
                 className="form-control"
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
@@ -138,11 +155,11 @@ export default function Login() {
 }
 
 export async function getStaticProps(context) {
-  const login = await axiosClient.get("/login");
+  const auth = await axiosClient.post("/auth/login-jwt");
 
   return {
     props: {
-      login,
+      auth,
     },
 
     revalidate: 3600,
