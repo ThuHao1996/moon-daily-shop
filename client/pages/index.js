@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { useState } from "react";
 import Image from "next/image";
 import { Inter } from "@next/font/google";
 // import styles from '@/styles/Home.module.css'
@@ -9,10 +10,19 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import img2 from "./homepage/images/sofa.jpg";
 import img3 from "./homepage/images/iphone.jpg";
 import img4 from "./homepage/images/bepga.jpg";
+import { API_URL } from "../constants/URL";
+import { axiosClient } from "../libraries/axiosClient";
+import numeral from "numeral";
+import { Rate } from "antd";
+import { Statistic } from "antd";
+const { Countdown } = Statistic;
+const deadline = Date.now() + 1000 * 60 * 60 * 24 * 2 + 1000 * 30;
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function Home() {
+export default function Home({ products, categories }) {
+  const [value, setValue] = useState(4);
+
   const toggleCarousel = (action) => {
     const { Carousel } = require("bootstrap");
     const carousel = new Carousel("#demo");
@@ -205,7 +215,7 @@ export default function Home() {
                 <div className={styles.block_item}>
                   <div className={styles.block_left}>
                     <i
-                      class="fa-solid fa-message"
+                      className="fa-solid fa-message"
                       style={{
                         fontSize: "45px",
                         color: "orange",
@@ -239,7 +249,126 @@ export default function Home() {
             </div>
           </div>
         </div>
+        <div className={styles.home_deal}>
+          <div className={styles.deal_header}>
+            <div className={styles.deal_left}>
+              <h3 className={styles.deal_heading}>Deal Of The Day</h3>
+            </div>
+            <div className={styles.deal_right}>
+              <h4 className={styles.deal_name}>End In: </h4>
+              <Countdown
+                value={deadline}
+                style={{ color: "#fff !important", fontWeight: "700" }}
+              />
+            </div>
+            <a href="/shop/ShopDefault" className={styles.deal_link}>
+              View All
+            </a>
+          </div>
+          <div className={styles.deal_content}>
+            {products.map((product) => {
+              return (
+                <div key={product._id} style={{ height: "490px" }}>
+                  <div
+                    className="card"
+                    style={{ width: "18rem", border: "none", height: "100%" }}
+                  >
+                    <div className={styles.deal_thumbnail}>
+                      <a href={`products/${product._id}`}>
+                        <img
+                          src={`${API_URL}/${product.images[0]}`}
+                          className="card-img-top"
+                          alt=""
+                          style={{
+                            width: "200px",
+                            height: "200px",
+                            marginLeft: "35px",
+                          }}
+                        />
+                      </a>
+                      <div className={styles.deal_discount}>
+                        - {product.discount} %
+                      </div>
+                    </div>
+                    <div
+                      className="card-body"
+                      style={{ backgroundColor: "#fff" }}
+                    >
+                      <a href="/shop/ShopDefault" className={styles.deal_shop}>
+                        YOUNG SHOP
+                      </a>
+                      <div className={styles.deal_list}>
+                        <p className={styles.deal_item1}>
+                          {numeral(product.price).format("0,0$")}
+                        </p>
+                        <div className={styles.deal_item2}>
+                          {product.stock > 0 ? (
+                            <p>Stock: {product.stock}</p>
+                          ) : (
+                            <p>Out Stock</p>
+                          )}
+                        </div>
+                      </div>
+                      <a
+                        href={`/products/${product._id}`}
+                        className="card-title"
+                        style={{ fontSize: "26px", display: "block" }}
+                      >
+                        {product.name}
+                      </a>
+                      <Rate onChange={setValue} value={value} />
+                      <p className={styles.deal_sold}>Sold: {product.sold}</p>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+        <div className={styles.home_categories}>
+          <h3 className={styles.categories_header}>Top Categories</h3>
+          <div className="row">
+            {categories.map((category) => {
+              return (
+                <div className="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6">
+                  <a
+                    href="/shop/ShopDefault"
+                    className={styles.categories_card}
+                    style={{ height: "250px" }}
+                  >
+                    <img
+                      src={`${API_URL}/${category.imageUrl}`}
+                      className="card-img-top"
+                      alt=""
+                      style={{
+                        width: "155px",
+                        height: "155px",
+                        marginTop: "15px",
+                        marginLeft: "48px",
+                      }}
+                    />
+                    <h5 className={styles.categories_title}>{category.name}</h5>
+                  </a>
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </main>
     </>
   );
+}
+
+export async function getStaticProps(context) {
+  const products = await axiosClient.get("/products");
+  const categories = await axiosClient.get("/categories");
+
+  return {
+    props: {
+      products,
+      categories,
+    },
+
+    // revalidate: 3600,
+  };
 }

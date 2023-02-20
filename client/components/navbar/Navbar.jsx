@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import styles from "./Navbar.module.css";
 import img from "./images/shopping-cart.png";
 import Image from "next/image";
 import Link from "next/link";
+import { DataContext } from "../../store/GlobalState";
 
 export default function Navbar() {
+  //-----------Set giá trị mặc định cho giỏ hàng------------
+  const { state, dispatch } = useContext(DataContext);
+  const { cart } = state;
   return (
     <>
       <div className={styles.navbar}>
@@ -79,16 +83,25 @@ export default function Navbar() {
                       </span>
                     </a>
                   </Link>
-                  <Link className={styles.header_extra} href="#">
+                  <div className={styles.header_extra}>
                     <i
                       className="fa-solid fa-cart-plus"
                       style={{ fontSize: "33px", color: "#db6451" }}
                     ></i>
                     <span className={styles.header_item}>
-                      <i className={styles.header_number}>0</i>
+                      <i className={styles.header_number}>{cart.length}</i>
+                      {/* Số trên giỏ hàng phụ thuộc vào độ dài của sản phẩm */}
                     </span>
-                    <div className={styles.desc}>No products in cart</div>
-                  </Link>
+                    <div>
+                      {cart.length === 0 ? (
+                        <div className={styles.desc}>No products in cart</div>
+                      ) : (
+                        <Link className={styles.desc} href="/cartshop/Cart">
+                          View cart
+                        </Link>
+                      )}
+                    </div>
+                  </div>
                   <div className={styles.header_user}>
                     <div className={styles.user_left}>
                       <i
@@ -248,48 +261,36 @@ export default function Navbar() {
                     </a>
                     <ul className={styles.sub_menu}>
                       <li className={styles.sub_menu1}>
-                        <a href="/">Smart Phone & Accessory</a>
+                        <a href="/">Samsung</a>
                       </li>
                       <li className={styles.sub_menu1}>
-                        <a href="/"> Electronic equipment</a>
+                        <a href="/"> Apple</a>
                       </li>
                       <li className={styles.sub_menu1}>
-                        <a href="/">Laptop</a>
+                        <a href="/">Gucci</a>
                       </li>
                       <li className={styles.sub_menu1}>
-                        <a href="/">Watch</a>
+                        <a href="/">Louis Vuitton</a>
                       </li>
                       <li className={styles.sub_menu1}>
-                        Household electrical appliances
+                        Sharp
                         <a href="/"></a>
                       </li>
                       <li className={styles.sub_menu1}>
-                        <a href="/">Sport & Travel</a>
+                        <a href="/">Mac</a>
                       </li>
                       <li className={styles.sub_menu1}>
-                        <a href="/">Mom & Babies</a>
+                        <a href="/">Panasonic</a>
                       </li>
                       <li className={styles.sub_menu1}>
-                        <a href="/">Home & Lifestyle</a>
+                        <a href="/">LG</a>
                       </li>
                       <li className={styles.sub_menu1}>
-                        <a href="/">Beauty Products</a>
+                        <a href="/">Oppo</a>
                       </li>
                       <li className={styles.sub_menu1}>
-                        Healthcare Products
+                        Dior
                         <a href="/"></a>
-                      </li>
-                      <li className={styles.sub_menu1}>
-                        <a href="/">Books</a>
-                      </li>
-                      <li className={styles.sub_menu1}>
-                        <a href="/">Balo & Bags</a>
-                      </li>
-                      <li className={styles.sub_menu1}>
-                        <a href="/"> Pets Care Products</a>
-                      </li>
-                      <li className={styles.sub_menu1}>
-                        <a href="/"> Accessories & Jewelry</a>
                       </li>
                     </ul>
                   </li>

@@ -1,13 +1,15 @@
 .account_container {
-  height: 850px;
+  height: 950px;
 }
 
 .account_title {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  height: 100px;
-  margin-left: 230px;
+  height: 80px;
+  background-color: #e3dfdf;
+  padding-left: 230px;
+  margin-bottom: 40px;
 }
 
 .account_link {

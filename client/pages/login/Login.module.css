@@ -1,13 +1,19 @@
 .account_container {
-  height: 670px;
+  height: 760px;
+}
+
+.account_header {
+  height: 100px;
 }
 
 .account_title {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  height: 100px;
-  margin-left: 230px;
+  height: 80px;
+  width: 100%;
+  padding-left: 230px;
+  background-color: #e3dfdf;
 }
 
 .account_link {
@@ -30,6 +36,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: 30px;
 }
 
 .account_heading {

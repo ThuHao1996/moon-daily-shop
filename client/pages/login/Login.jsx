@@ -1,7 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import styles from "./Login.module.css";
-import { axiosClient } from "../../libraries/axiosClient";
+// import { axiosClient } from "../../libraries/axiosClient";
 
 export default function Login() {
   // const onFinish = (values) => {
@@ -25,17 +25,19 @@ export default function Login() {
         <title>LOGIN</title>
       </Head>
       <div className={styles.account_container}>
-        <div className={styles.account_title}>
-          <a className={styles.account_link} href="/">
-            HOME
-          </a>
-          <a className={styles.account_link1} href="">
-            LOGIN
-          </a>
+        <div className={styles.account_header}>
+          <div className={styles.account_title}>
+            <a className={styles.account_link} href="/">
+              HOME
+            </a>
+            <a className={styles.account_link1} href="">
+              LOGIN
+            </a>
+          </div>
         </div>
         <div className={styles.my_account}>
           <h1 className={styles.account_heading}>LOGIN</h1>
-          <form className={styles.account_form} onClick={onFinish()}>
+          <form className={styles.account_form}>
             <h2 className={styles.account_name}>Log In Your Account</h2>
             <div className={styles.form}>
               <label
@@ -51,7 +53,7 @@ export default function Login() {
               </label>
               <input
                 type="email"
-                name="username"
+                name="email"
                 className="form-control"
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
@@ -88,6 +90,7 @@ export default function Login() {
               </label>
               <input
                 type="password"
+                name="password"
                 className="form-control"
                 id="exampleInputPassword1"
                 placeholder="Password..."
@@ -154,14 +157,14 @@ export default function Login() {
   );
 }
 
-export async function getStaticProps(context) {
-  const auth = await axiosClient.post("/auth/login-jwt");
+// export async function getStaticProps(context) {
+//   const auth = await axiosClient.post("/auth/login-jwt");
 
-  return {
-    props: {
-      auth,
-    },
+//   return {
+//     props: {
+//       auth,
+//     },
 
-    revalidate: 3600,
-  };
-}
+//     revalidate: 3600,
+//   };
+// }

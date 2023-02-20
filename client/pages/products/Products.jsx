@@ -1,30 +1,41 @@
 import Head from "next/head";
-import React from "react";
+import React, { useContext } from "react";
 import numeral from "numeral";
 import styles from "./Products.module.css";
 import { axiosClient } from "../../libraries/axiosClient";
 import { API_URL } from "../../constants/URL";
+import { DataContext } from "../../store/GlobalState";
+import { addToCart } from "../../store/Actions";
 
 export default function Products({ products }) {
-  const userLink = (id) => {
-    return (
-      <>
-        <a
-          href={`/productdetails/${id}`}
-          className="btn btn-info"
-          style={{ marginRight: "5px", flex: 1, color: "#fff" }}
-        >
-          View
-        </a>
-        <button
-          className="btn btn-success"
-          style={{ marginLeft: "5px", flex: 1 }}
-        >
-          Buy
-        </button>
-      </>
-    );
-  };
+  //---------Thêm sản phẩm vào giỏ hàng----------------
+  const { state, dispatch } = useContext(DataContext);
+  const { cart } = state;
+  // console.log("cart", cart);
+
+  // const userLink = (id) => {
+  //   return (
+  //     <>
+  //       <a
+  //         href={`/products/${id}`}
+  //         className="btn btn-info"
+  //         style={{ marginRight: "5px", flex: 1, color: "#fff" }}
+  //       >
+  //         View
+  //       </a>
+
+  //       <button
+  //         key={product._id}
+  //         className="btn btn-success"
+  //         style={{ marginLeft: "5px", flex: 1 }}
+  //         disabled={product.stock === 0 ? true : false}
+  //         onClick={() => dispatch(addToCart(product, cart))}
+  //       >
+  //         Buy
+  //       </button>
+  //     </>
+  //   );
+  // };
   return (
     <>
       <Head>
@@ -45,7 +56,7 @@ export default function Products({ products }) {
           {products &&
             products.map((product) => {
               return (
-                <div key={product._id}>
+                <div key={product._id} style={{ height: "650px" }}>
                   <div className="card" style={{ width: "21rem" }}>
                     <img
                       src={`${API_URL}/${product.images[0]}`}
@@ -56,16 +67,42 @@ export default function Products({ products }) {
                       <h3 className="card-title">{product.name}</h3>
                       <div className="d-flex justify-content-between mx-0">
                         <p className={styles.product_price}>
-                          {numeral(product.price).format("0,0")}đ
+                          {numeral(product.price).format("0,0$")}
                         </p>
-                        <p className="text-danger">
-                          Stock: {numeral(product.stock).format("0,0.0")}
-                        </p>
+                        <div>
+                          {product.stock > 0 ? (
+                            <span className="text-danger">
+                              Stock: {numeral(product.stock).format("0,0.0")}
+                            </span>
+                          ) : (
+                            <span className="text-danger">OutStock</span>
+                          )}
+                        </div>
                       </div>
+                      <p style={{ color: "#ed14ed" }}>Sold: {product.sold}</p>
 
                       <p className="card-text">{product.description}</p>
                       <div className="d-flex justify-content-between mx-0">
-                        {userLink(product._id)}
+                        <a
+                          href={`/products/${product._id}`}
+                          className="btn btn-info"
+                          style={{ marginRight: "5px", flex: 1, color: "#fff" }}
+                        >
+                          View
+                        </a>
+
+                        <button
+                          key={product._id}
+                          className="btn btn-success"
+                          style={{ marginLeft: "5px", flex: 1 }}
+                          //--------Nếu stock=0 thì vô hiệu hóa button Buy ở dưới--------
+                          disabled={product.stock === 0 ? true : false}
+                          //---------Thêm sản phẩm vào giỏ hàng--------------
+                          onClick={() => dispatch(addToCart(product, cart))}
+                        >
+                          Buy
+                        </button>
+                        {/* {userLink(product._id)} */}
                       </div>
                     </div>
                   </div>

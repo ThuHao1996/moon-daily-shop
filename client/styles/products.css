@@ -1,5 +1,6 @@
 .card {
   margin: 15px 30px;
+  height: 540px;
 }
 
 .card-title {
@@ -20,10 +21,36 @@
 }
 
 .card-body {
-  background-color: #bef3be;
+  background-color: #96f396;
 }
 
 .card-img-top {
   height: 250px;
   width: 100%;
+}
+
+.btn-info:hover {
+  transform: scale(1.2);
+  border: 1px solid green;
+}
+
+.btn-success:hover {
+  transform: scale(1.2);
+  border: 1px solid orange;
+}
+
+/* -------------Product Details---------------- */
+.img-item:hover {
+  transform: scale(1.2);
+}
+
+.product_menu {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.product_sold {
+  color: #ef5aef;
+  font-size: 20px;
 }

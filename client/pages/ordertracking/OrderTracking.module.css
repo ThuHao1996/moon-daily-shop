@@ -1,5 +1,5 @@
 .order_container {
-  height: 750px;
+  height: 850px;
 }
 
 .order_header {
@@ -55,7 +55,7 @@
 .order_form {
   display: flex;
   justify-content: center;
-  height: 300px;
+  height: 360px;
   margin-top: 100px;
 }
 
