@@ -312,7 +312,7 @@ export default function Home({ products, categories }) {
                       <a
                         href={`/products/${product._id}`}
                         className="card-title"
-                        style={{ fontSize: "26px", display: "block" }}
+                        style={{ fontSize: "22px", display: "block" }}
                       >
                         {product.name}
                       </a>
@@ -330,7 +330,10 @@ export default function Home({ products, categories }) {
           <div className="row">
             {categories.map((category) => {
               return (
-                <div className="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6">
+                <div
+                  className="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6"
+                  key={category._id}
+                >
                   <a
                     href="/shop/ShopDefault"
                     className={styles.categories_card}

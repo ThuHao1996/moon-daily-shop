@@ -3,6 +3,8 @@ export const ACTIONS = {
   AUTH: "AUTH",
   ADD_CART: "ADD_CART",
   ADD_MODAL: "ADD_MODAL",
+  ADD_FAVOURITE: "ADD_FAVOURITE",
+  // ADD_MODALFAVOURITE: "ADD_MODALFAVOURITE",
 };
 
 //-------------Thêm sản phẩm vào giỏ hàng-------------
@@ -54,3 +56,20 @@ export const deleteItem = (data, id, type) => {
   return { type, payload: newData };
 };
 //---------------End---------------------------------------
+
+export const addToFavourite = (product, favourite) => {
+  const check = favourite.every((item) => {
+    return item._id !== product._id;
+  });
+
+  if (!check)
+    return {
+      type: "NOTIFY",
+      payload: { error: "The product has been added to favourite." },
+    };
+
+  return {
+    type: "ADD_FAVOURITE",
+    payload: [...favourite, { ...product, quantity: 1 }],
+  };
+};

@@ -8,7 +8,7 @@ export default function Modal() {
 
   //-----Tạo sự kiện khi bấm chuột vào để xóa sản phẩm------------
   const handleSubmit = () => {
-    dispatch(deleteItem(modal.data, modal.id, "ADD_CART"));
+    dispatch(deleteItem(modal.data, modal.id, modal.type));
     dispatch({ type: "ADD_MODAL", payload: {} });
   };
   //------End-------------------------------------------------------

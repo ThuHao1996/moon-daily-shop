@@ -1,13 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import Head from "next/head";
 import styles from "./Categories.module.css";
 import Image from "next/image";
-import img from "./images/laptop.jpeg";
-import img1 from "./images/dieuhoa.jpeg";
-import img2 from "./images/lo nuong.jpeg";
-import img3 from "./images/baby.jpeg";
-import img4 from "./images/my pham.jpeg";
-import img5 from "./images/thuc pham.jpeg";
 import img6 from "./images/maygiatsale.png";
 import img7 from "./images/dieuhoa.jpeg";
 import img8 from "./images/may giat 1.jpeg";
@@ -32,8 +26,12 @@ import img26 from "./images/suaruamat.jpeg";
 import img27 from "./images/kemat.jpeg";
 import img28 from "./images/kemay.jpeg";
 import img29 from "./images/phanmat.jpeg";
+import { axiosClient } from "../../libraries/axiosClient";
+import { API_URL } from "../../constants/URL";
 
-export default function Categories() {
+export default function Categories({ categories, subCategories }) {
+  const [tab, setTab] = useState(0);
+
   return (
     <>
       <Head>
@@ -54,59 +52,67 @@ export default function Categories() {
           <div className={styles.container_top}>
             <div className={styles.container_left}>
               <h2 className={styles.container_heading}>CATEGORIES</h2>
-              <ul className={styles.container_list}>
-                <li className={styles.container_item}>
-                  Smart Phone & Accessory
-                </li>
-                <li className={styles.container_item}>Electronic Equipment</li>
-                <li className={styles.container_item}>
-                  Household Electrical Appliances
-                </li>
-                <li className={styles.container_item}>Mom & Babies</li>
-                <li className={styles.container_item}>Beauty Products</li>
-                <li className={styles.container_item1}>Healthcare Products</li>
-              </ul>
+              {categories.map((category) => {
+                return (
+                  <ul className={styles.container_list} key={category._id}>
+                    <li className={styles.container_item}>{category.name}</li>
+                  </ul>
+                );
+              })}
             </div>
             <div className={styles.container_right}>
-              <div className={styles.group_menu}>
-                <div className={styles.group_left}>
-                  <Image
-                    src={img}
-                    alt=""
-                    width={100}
-                    height={120}
-                    style={{ padding: "20px 0 0 5px" }}
-                  />
-                </div>
-                <div className={styles.group_right}>
-                  <h3 className={styles.group_heading}>
-                    Smart Phone & Accessory
-                  </h3>
-                  <ul className={styles.group_list}>
-                    <li className={styles.group_item}>
-                      <a className={styles.links_item} href="/shop/ShopDefault">
-                        Desktop PC
-                      </a>
-                    </li>
-                    <li className={styles.group_item}>
-                      <a className={styles.links_item} href="/shop/ShopDefault">
-                        Laptop
-                      </a>
-                    </li>
-                    <li className={styles.group_item}>
-                      <a className={styles.links_item} href="/shop/ShopDefault">
-                        Tablet
-                      </a>
-                    </li>
-                    <li className={styles.group_item}>
-                      <a className={styles.links_item} href="/shop/ShopDefault">
-                        Phone
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div className={styles.group_menu}>
+              {subCategories.map((category, id) => {
+                console.log("category", category);
+                console.log("id", id);
+                return (
+                  <div className={styles.group_menu} key={category._id}>
+                    <div className={styles.group_left}>
+                      <img
+                        src={`${API_URL}/${category.imageUrl}`}
+                        alt=""
+                        width={100}
+                        height={120}
+                        style={{ padding: "20px 0 0 5px" }}
+                      />
+                    </div>
+                    <div className={styles.group_right}>
+                      <h3 className={styles.group_heading}>{category.name}</h3>
+                      <div className={styles.group_list}>
+                        <a
+                          className={styles.links_item1}
+                          href="/shop/ShopDefault"
+                        >
+                          {category.products[tab].name}
+                        </a>
+                        <ul className={styles.group_list}>
+                          {category.products.map((product, index) => {
+                            console.log("index", index);
+                            return (
+                              <li
+                                className={styles.group_item}
+                                key={product._id}
+                              >
+                                <a
+                                  className={styles.links_item}
+                                  href="/shop/ShopDefault"
+                                  key={index}
+                                  onClick={() => {
+                                    setTab(index + index);
+                                  }}
+                                >
+                                  {product.name}
+                                </a>
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+
+              {/* <div className={styles.group_menu}>
                 <div className={styles.group_left}>
                   <Image
                     src={img1}
@@ -287,7 +293,7 @@ export default function Categories() {
                     </li>
                   </ul>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
 
@@ -672,4 +678,18 @@ export default function Categories() {
       </div>
     </>
   );
+}
+
+export async function getStaticProps(context) {
+  const categories = await axiosClient.get("/categories");
+  const subCategories = await axiosClient.get("/categories/questions/18");
+
+  return {
+    props: {
+      categories,
+      subCategories,
+    },
+
+    // revalidate: 3600,
+  };
 }

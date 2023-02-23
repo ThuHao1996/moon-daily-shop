@@ -175,7 +175,11 @@ export default function Cart() {
                             onClick={() => {
                               dispatch({
                                 type: "ADD_MODAL",
-                                payload: { data: cart, id: item._id },
+                                payload: {
+                                  data: cart,
+                                  id: item._id,
+                                  type: "ADD_CART",
+                                },
                               });
                             }}
                           ></i>

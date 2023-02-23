@@ -9,6 +9,7 @@ export default function Navbar() {
   //-----------Set giá trị mặc định cho giỏ hàng------------
   const { state, dispatch } = useContext(DataContext);
   const { cart } = state;
+  const { favourite } = state;
   return (
     <>
       <div className={styles.navbar}>
@@ -79,7 +80,10 @@ export default function Navbar() {
                         style={{ fontSize: "33px", color: "#db6451" }}
                       ></i>
                       <span className={styles.header_item}>
-                        <i className={styles.header_number}>0</i>
+                        <i className={styles.header_number}>
+                          {/* Số trên mục yêu thích phụ thuộc vào độ dài của sản phẩm */}
+                          {favourite.length}
+                        </i>
                       </span>
                     </a>
                   </Link>
@@ -205,15 +209,6 @@ export default function Navbar() {
                         <a href="/">Apple Iphone 14 Pro Max 128GB</a>
                       </li>
                       <li className={styles.sub_menu1}>
-                        <a href="/">Apple AirPods Pro</a>
-                      </li>
-                      <li className={styles.sub_menu1}>
-                        <a href="/">Apple Pencil 1</a>
-                      </li>
-                      <li className={styles.sub_menu1}>
-                        <a href="/">Apple 20W USB-C Power Adapter</a>
-                      </li>
-                      <li className={styles.sub_menu1}>
                         Điện thoại Samsung Galaxy Z Flip4 5G 128GB
                         <a href="/"></a>
                       </li>
@@ -239,15 +234,6 @@ export default function Navbar() {
                       </li>
                       <li className={styles.sub_menu1}>
                         <a href="/">Bếp nướng điện Nagakawa NAG3104</a>
-                      </li>
-                      <li className={styles.sub_menu1}>
-                        <a href="/">Máy xay sinh tố Philips HR2223/00 700W</a>
-                      </li>
-                      <li className={styles.sub_menu1}>
-                        <a href="/"> Máy ép trái cây Philips HR1811</a>
-                      </li>
-                      <li className={styles.sub_menu1}>
-                        <a href="/"> Nồi áp suất điện tử 6L HD2137/65</a>
                       </li>
                     </ul>
                   </li>

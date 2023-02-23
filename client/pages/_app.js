@@ -1,7 +1,8 @@
 import Layout from "../components/Layout";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "antd/dist/reset.css";
-import "@/styles/globals.css";
+// import "@/styles/globals.css";
+import "../styles/globals.css";
 import numeral from "numeral";
 import "numeral/locales/vi";
 import { useEffect } from "react";

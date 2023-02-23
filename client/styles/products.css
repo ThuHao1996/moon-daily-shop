@@ -54,3 +54,27 @@
   color: #ef5aef;
   font-size: 20px;
 }
+
+.button_list {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.button-heart {
+  color: #e2ff00;
+  background-color: red;
+  font-weight: 700;
+  padding: 10px 30px;
+  border-radius: 8px;
+  border: none;
+}
+
+.button-heart:hover {
+  transform: scale(1.2);
+}
+
+.icon-heart {
+  padding-left: 12px;
+  font-size: 21px;
+}

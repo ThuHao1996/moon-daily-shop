@@ -1,12 +1,12 @@
-.account_container {
-  height: 620px;
+.whishlist_container {
+  min-height: 700px;
 }
 
-.account_header {
+.whishlist_header {
   height: 100px;
 }
 
-.account_title {
+.whishlist_title {
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -15,22 +15,22 @@
   background-color: #e3dfdf;
 }
 
-.account_link {
+.whishlist_link {
   padding-right: 20px;
   color: rgb(3, 104, 3);
   margin-left: 230px;
 }
 
-.account_link:hover {
+.whishlist_link:hover {
   color: orange;
 }
 
-.account_link1::before {
+.whishlist_link1::before {
   content: "/";
   margin-right: 20px;
 }
 
-.account_heading {
+.whishlist_heading {
   text-align: center;
   color: green;
   font-style: italic;
@@ -38,7 +38,7 @@
   font-size: 40px;
 }
 
-.account_name {
+.whishlist_name {
   color: #045004;
   font-size: 20px;
   line-height: 45px;
@@ -50,4 +50,16 @@
   background-color: #b8e7b8;
   border: 1px solid #3bd52c;
   margin-top: 100px;
+}
+
+.whishlist_cart {
+  display: flex;
+  align-items: center;
+  margin: 15px;
+}
+
+.whishlist_content {
+  padding-left: 20px;
+  font-size: 20px;
+  color: green;
 }

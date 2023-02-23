@@ -1,17 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Head from "next/head";
 import styles from "./ShopDefault.module.css";
 import Image from "next/image";
 import img from "./images/maygiat.png";
 import img1 from "./images/tulanh.jpg";
 import img2 from "./images/son.jpg";
-import img3 from "./images/Dior.jpg";
-import img4 from "./images/samsung.webp";
-import img5 from "./images/apple.png";
-import img6 from "./images/LG.webp";
-import img7 from "./images/sharp.jpg";
-import img8 from "./images/mac.jpg";
-import img9 from "./images/panasonic.jpg";
 import img10 from "./images/laptop.jpeg";
 import img11 from "./images/dieuhoa.jpeg";
 import img12 from "./images/lo nuong.jpeg";
@@ -20,15 +13,18 @@ import img14 from "./images/my pham.jpeg";
 import img15 from "./images/thuc pham.jpeg";
 import img16 from "./images/daychuyen.jpeg";
 import img17 from "./images/hotel.jpeg";
-import Product from "../../components/product/Product";
-import img18 from "../../components/product/img/blockui7.1.jpg";
-import img19 from "../../components/product/img/blockui7.2.jpg";
-import img20 from "../../components/product/img/blockui7.3.jpg";
-import img21 from "../../components/product/img/blockui7.4.jpg";
-import img22 from "../../components/product/img/blockui7.5.jpg";
-import img23 from "../../components/product/img/blockui7.6.jpg";
+import { API_URL } from "../../constants/URL";
+import { Rate } from "antd";
+import numeral from "numeral";
+import { DataContext } from "../../store/GlobalState";
+import { addToFavourite } from "../../store/Actions";
+import { axiosClient } from "../../libraries/axiosClient";
 
-export default function ShopDefault() {
+export default function ShopDefault({ suppliers, products, categories }) {
+  const [value, setValue] = useState(4);
+  const { state, dispatch } = useContext(DataContext);
+  const { favourite } = state;
+
   const toggleCarousel = (action) => {
     const { Carousel } = require("bootstrap");
     const carousel = new Carousel("#demo");
@@ -38,6 +34,7 @@ export default function ShopDefault() {
       carousel.prev();
     }
   };
+
   return (
     <>
       <Head>
@@ -126,27 +123,18 @@ export default function ShopDefault() {
             </div>
           </div>
           <div className={styles.shop_brand}>
-            <a href="">
-              <Image src={img3} width={150} height={70} alt="" />
-            </a>
-            <a href="">
-              <Image src={img4} width={150} height={70} alt="" />
-            </a>
-            <a href="">
-              <Image src={img5} width={150} height={70} alt="" />
-            </a>
-            <a href="">
-              <Image src={img6} width={150} height={70} alt="" />
-            </a>
-            <a href="">
-              <Image src={img7} width={150} height={70} alt="" />
-            </a>
-            <a href="">
-              <Image src={img8} width={150} height={70} alt="" />
-            </a>
-            <a href="">
-              <Image src={img9} width={150} height={70} alt="" />
-            </a>
+            {suppliers &&
+              suppliers.map((supplier) => {
+                return (
+                  <a href="" key={supplier._id}>
+                    <img
+                      src={`${API_URL}/${supplier.imageUrl}`}
+                      width={150}
+                      height={70}
+                    />
+                  </a>
+                );
+              })}
           </div>
           <div className={styles.shop_categories}>
             <div className={styles.group_menu}>
@@ -443,102 +431,141 @@ export default function ShopDefault() {
             </div>
           </div>
           <div className={styles.layout_shop}>
-            <Product
-              name={"BEST SALE ITEMS"}
-              icon2={"fa-solid fa-chevron-left"}
-              icon3={"fa-solid fa-chevron-right"}
-              number={"-39%"}
-              name2={"YOUNG SHOP"}
-              price={"$1,422.7"}
-              price1={"$1,025.5"}
-              text={"18% off"}
-              text1={"LG White Front Load Steam Washer"}
-              icon={"fa-solid fa-star"}
-              icon1={"fa-regular fa-star"}
-              bgColor={"rgb(251 188 42)"}
-              bgColor1={"#e0dedefb"}
-              widthColor={180}
-              text2={"Sold: 10"}
-              img={img18}
-            />
-            <Product
-              number={"-13%"}
-              name2={"YOUNG SHOP"}
-              price={"$96"}
-              price1={"$85"}
-              text={"18% off"}
-              text1={"Edifier Powered Bookshelf Speakers"}
-              icon={"fa-solid fa-star"}
-              icon1={"fa-regular fa-star"}
-              bgColor={"rgb(251 188 42)"}
-              bgColor1={"#e0dedefb"}
-              widthColor={160}
-              text2={"Sold: 15"}
-              img={img19}
-            />
-            <Product
-              number={"-37%"}
-              name2={"YOUNG SHOP"}
-              price={"$62.99"}
-              price1={"$45.9"}
-              text={"18% off"}
-              text1={"Amcrest Security Camera in White Color"}
-              icon={"fa-solid fa-star"}
-              icon1={"fa-regular fa-star"}
-              bgColor={"rgb(251 188 42)"}
-              bgColor1={"#e0dedefb"}
-              widthColor={140}
-              text2={"Sold: 20"}
-              img={img20}
-            />
-            <Product
-              number={"-27%"}
-              name2={"YOUNG SHOP"}
-              price={"$41.99"}
-              price1={"$32.99"}
-              text={"18% off"}
-              text1={"Grand Slam Indoor Of Show Jumping Novel"}
-              icon={"fa-solid fa-star"}
-              icon1={"fa-regular fa-star"}
-              bgColor={"rgb(251 188 42)"}
-              bgColor1={"#e0dedefb"}
-              widthColor={130}
-              text2={"Sold: 22"}
-              img={img21}
-            />
-            <Product
-              number={"-6%"}
-              name2={"YOUNG SHOP"}
-              price={"$106.96"}
-              price1={"$100.99"}
-              text={"18% off"}
-              text1={"Sound Intone I65 Earphone White Verson"}
-              icon={"fa-solid fa-star"}
-              icon1={"fa-regular fa-star"}
-              bgColor={"rgb(251 188 42)"}
-              bgColor1={"#e0dedefb"}
-              widthColor={180}
-              text2={"Sold: 10"}
-              img={img22}
-            />
-            <Product
-              number={"-18%"}
-              name2={"YOUNG SHOP"}
-              price={"$670.2"}
-              price1={"$567.8"}
-              text={"18% off"}
-              text1={"Korea Long Sofa Fabric In Blue Navy Color"}
-              icon={"fa-solid fa-star"}
-              icon1={"fa-regular fa-star"}
-              bgColor={"rgb(251 188 42)"}
-              bgColor1={"#e0dedefb"}
-              widthColor={200}
-              text2={"Sold: 79"}
-              img={img23}
-            />
+            <h3 className={styles.layout_heading}>Best Sale Item</h3>
+            <div className={styles.layout_product}>
+              {products &&
+                products.map((product) => {
+                  return (
+                    <div
+                      key={product._id}
+                      style={{ height: "500px" }}
+                      className={styles.product_item}
+                    >
+                      <div
+                        className="card"
+                        style={{
+                          width: "18rem",
+                          border: "none",
+                          height: "90%",
+                        }}
+                      >
+                        <div className={styles.layout_thumbnail}>
+                          <a href={`products/${product._id}`}>
+                            <img
+                              src={`${API_URL}/${product.images[2]}`}
+                              className="card-img-top"
+                              alt=""
+                              style={{
+                                width: "200px",
+                                height: "200px",
+                                marginLeft: "35px",
+                              }}
+                            />
+                          </a>
+                          <div className={styles.layout_discount}>
+                            - {product.discount} %
+                          </div>
+                        </div>
+                        <div
+                          className="card-body"
+                          style={{ backgroundColor: "#fff" }}
+                        >
+                          <a
+                            href="/shop/ShopDefault"
+                            className={styles.layout_name}
+                          >
+                            YOUNG SHOP
+                          </a>
+                          <div className={styles.layout_list}>
+                            <p className={styles.layout_item1}>
+                              {numeral(product.total).format("0,0$")}
+                            </p>
+                            <div className={styles.layout_item2}>
+                              {numeral(product.price).format("0,0$")}
+                            </div>
+                          </div>
+                          <a
+                            href={`/products/${product._id}`}
+                            className="card-title"
+                            style={{ fontSize: "22px", display: "block" }}
+                          >
+                            {product.name}
+                          </a>
+                          <Rate
+                            onChange={setValue}
+                            value={value}
+                            className={styles.rate}
+                          />
+                          <p className={styles.layout_sold}>
+                            Sold: {product.sold}
+                          </p>
+                          <button
+                            type="button"
+                            className={styles.layout_button}
+                            onClick={() =>
+                              dispatch(addToFavourite(product, favourite))
+                            }
+                          >
+                            MY FAVOURITE
+                            <i
+                              className="fa-regular fa-heart"
+                              style={{ paddingLeft: "12px", fontSize: "21px" }}
+                            ></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+            </div>
+          </div>
+          <div className={styles.shop_menu}>
+            <div className={styles.menu_left}>
+              <div className={styles.menu_heading}>CATEGORIES</div>
+              <div className={styles.menu_content}>
+                {categories &&
+                  categories.map((category) => {
+                    return (
+                      <div key={category._id} className={styles.menu_text}>
+                        <a href={`/categories/${category._id}`}>
+                          {category.name}
+                        </a>
+                      </div>
+                    );
+                  })}
+              </div>
+            </div>
+            <div className={styles.menu_right}>
+              <div className={styles.menu_heading}>BY BRANDS</div>
+              <div className={styles.menu_content}>
+                {suppliers.map((supplier) => {
+                  return (
+                    <div key={supplier._id} className={styles.menu_text}>
+                      <a>{supplier.name}</a>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </>
   );
+}
+
+export async function getStaticProps(context) {
+  const suppliers = await axiosClient.get("/suppliers");
+  const products = await axiosClient.get("/products");
+  const categories = await axiosClient.get("/categories/:id/questions/18");
+
+  return {
+    props: {
+      suppliers,
+      products,
+      categories,
+    },
+
+    // revalidate: 3600,
+  };
 }

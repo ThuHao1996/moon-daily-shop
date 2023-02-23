@@ -6,6 +6,7 @@ import { API_URL } from "../../constants/URL";
 import { Rate } from "antd";
 import { DataContext } from "../../store/GlobalState";
 import { addToCart } from "../../store/Actions";
+import { addToFavourite } from "../../store/Actions";
 
 export default function ProductDetails({ product }) {
   //-----------Set cho ảnh con-------------------------
@@ -14,7 +15,10 @@ export default function ProductDetails({ product }) {
   const [value, setValue] = useState(4);
   // -----------Thêm vào giỏ hàng-------------------
   const { state, dispatch } = useContext(DataContext);
+  const { favourite } = state;
   const { cart } = state;
+  console.log(cart);
+  console.log(product);
   //-------------------------------------------------
   // console.log("product", product);
   return (
@@ -122,14 +126,24 @@ export default function ProductDetails({ product }) {
             <div style={{ paddingTop: "10px", fontSize: "19px" }}>
               Description: {product.description}
             </div>
-            <button
-              type="button"
-              className="btn btn-success d-block my-5 px-5"
-              style={{ marginTop: "20px" }}
-              onClick={() => dispatch(addToCart(product, cart))}
-            >
-              BUY NOW
-            </button>
+            <div className="button_list">
+              <button
+                type="button"
+                className="btn btn-success d-block my-5 px-5"
+                style={{ marginTop: "20px" }}
+                onClick={() => dispatch(addToCart(product, cart))}
+              >
+                BUY NOW
+              </button>
+              <button
+                type="button"
+                className="button-heart"
+                onClick={() => dispatch(addToFavourite(product, favourite))}
+              >
+                MY FAVOURITE
+                <i className="fa-regular fa-heart icon-heart"></i>
+              </button>
+            </div>
           </div>
         </div>
         <div
