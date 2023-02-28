@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import Head from "next/head";
 import styles from "./Cart.module.css";
 import { DataContext } from "../../store/GlobalState";
-import { API_URL } from "../../constants/URL";
+import { API_URL } from "../../constants/URLS";
 import numeral from "numeral";
 import { decrease, increase } from "../../store/Actions";
 

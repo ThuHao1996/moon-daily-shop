@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import Head from "next/head";
 import styles from "./Whishlist.module.css";
 import { DataContext } from "../../store/GlobalState";
-import { API_URL } from "../../constants/URL";
+import { API_URL } from "../../constants/URLS";
 import numeral from "numeral";
 
 export default function Whishlist() {
@@ -78,7 +78,7 @@ export default function Whishlist() {
                         >
                           <img
                             className="img-thumbnail"
-                            src={`${API_URL}/${item.images[0]}`}
+                            src={`${API_URL}/${item.imageUrl}`}
                             alt=""
                             style={{ width: "120px", height: "120px" }}
                           />

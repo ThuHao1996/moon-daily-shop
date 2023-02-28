@@ -4,7 +4,7 @@ const express = require("express");
 const router = express.Router();
 // MULTER UPLOAD
 const multer = require("multer");
-const { updateDocument, findDocument } = require("../helpers/MongoDbHelper");
+const { updateDocument, findDocument } = require("../helpers/MongoDBHelper");
 
 const UPLOAD_DIRECTORY = "./public/uploads";
 

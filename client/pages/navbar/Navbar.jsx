@@ -1,0 +1,387 @@
+import React, { useContext } from "react";
+import styles from "./Navbar.module.css";
+import img from "./images/shopping-cart.png";
+import Image from "next/image";
+import Link from "next/link";
+import { axiosClient } from "../../libraries/axiosClient";
+import { DataContext } from "../../store/GlobalState";
+import NavbarMenu from "../navbarmenu/NavbarMenu";
+import Search from "../Search";
+
+export default function Navbar({ categories, products, suppliers }) {
+  console.log("categories", categories);
+
+  //-----------Set giá trị mặc định cho giỏ hàng------------
+  const { state, dispatch } = useContext(DataContext);
+  const { cart } = state;
+  const { favourite } = state;
+
+  return (
+    <>
+      <div className={styles.navbar}>
+        <div className={styles.header}>
+          <div className={styles.header_top}>
+            <div className={styles.header_container}>
+              <div className={styles.header_left}>
+                <Image
+                  src={img}
+                  alt=""
+                  width={50}
+                  height={50}
+                  className={styles.image}
+                />
+                <h1 className={styles.heading}>MOON</h1>
+              </div>
+              <div className={styles.header_center}>
+                {/* <Search state={state} /> */}
+                <div className={styles.menu_icon}>
+                  <a className={styles.header_name}>Search Products</a>
+                  <i
+                    className="fa-solid fa-chevron-down"
+                    style={{
+                      fontSize: "26px",
+                      marginLeft: "auto",
+                      marginRight: "23px",
+                      color: "#726f6f",
+                    }}
+                  ></i>
+                </div>
+
+                <ul className={styles.header_sub}>
+                  <li className={styles.header_sub1}>
+                    <a href="/categories/SmartPhoneAccessory">
+                      Smart Phone & Accessory
+                    </a>
+                  </li>
+                  <li className={styles.header_sub1}>
+                    <a href="/categories/ElectronicEquipment">
+                      Electronic Equipment
+                    </a>
+                  </li>
+                  <li className={styles.header_sub1}>
+                    <a href="/categories/HouseholdElectricalAppliances">
+                      Household Electrical Appliances
+                    </a>
+                  </li>
+                  <li className={styles.header_sub1}>
+                    <a href="/categories/MomBabies">Mom & Babies</a>
+                  </li>
+                  <li className={styles.header_sub1}>
+                    <a href="/categories/BeautyProducts">Beauty Products</a>
+                  </li>
+                  <li className={styles.header_sub1}>
+                    <a href="/categories/FashionAccessory">
+                      Fashion And Accessory
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div className={styles.header_right}>
+                <div className={styles.header_actions}>
+                  <Link legacyBehavior href="/whishlist/Whishlist">
+                    <a className={styles.header_extra}>
+                      <i
+                        className="fa-regular fa-heart"
+                        style={{ fontSize: "33px", color: "#db6451" }}
+                      ></i>
+                      <span className={styles.header_item}>
+                        <i className={styles.header_number}>
+                          {/* Số trên mục yêu thích phụ thuộc vào độ dài của sản phẩm */}
+                          {favourite.length}
+                        </i>
+                      </span>
+                    </a>
+                  </Link>
+                  <div className={styles.header_extra}>
+                    <i
+                      className="fa-solid fa-cart-plus"
+                      style={{ fontSize: "33px", color: "#db6451" }}
+                    ></i>
+                    <span className={styles.header_item}>
+                      <i className={styles.header_number}>{cart.length}</i>
+                      {/* Số trên giỏ hàng phụ thuộc vào độ dài của sản phẩm */}
+                    </span>
+                    <div>
+                      {cart.length === 0 ? (
+                        <div className={styles.desc}>No products in cart</div>
+                      ) : (
+                        <Link className={styles.desc} href="/cartshop/Cart">
+                          View cart
+                        </Link>
+                      )}
+                    </div>
+                  </div>
+                  <div className={styles.header_user}>
+                    <div className={styles.user_left}>
+                      <i
+                        className="fa-regular fa-user"
+                        style={{ fontSize: "33px", color: "#db6451" }}
+                      ></i>
+                    </div>
+                    <div className={styles.user_right}>
+                      <Link href="/login/Login">LOGIN</Link>
+                      <Link href="/register/Register">REGISTER</Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <nav className={styles.nav}>
+            <div className={styles.nav_container}>
+              <div className={styles.nav_left}>
+                {/* <ul className={styles.menu}>
+                  <li className={styles.menu_item}>
+                    <a className={styles.menu_heading} href="/">
+                      HOME
+                      <i
+                        className="fa-solid fa-chevron-down"
+                        style={{ fontSize: "15px", paddingLeft: "10px" }}
+                      ></i>
+                    </a>
+                  </li>
+                  <li className={styles.menu_item}>
+                    <a
+                      className={styles.menu_heading}
+                      href="/categories/Categories"
+                    >
+                      CATEGORIES
+                      <i
+                        className="fa-solid fa-chevron-down"
+                        style={{ fontSize: "15px", paddingLeft: "10px" }}
+                      ></i>
+                    </a>
+                    <ul className={styles.sub_menu}>
+                      {categories &&
+                        categories.map((c) => {
+                          console.log("c", c);
+                          return (
+                            <li key={c._id} className={styles.menu_item}>
+                              <a href="">{c.name}</a>
+                            </li>
+                          );
+                        })}
+                    </ul> */}
+                <NavbarMenu />
+                {/* <ul className={styles.menu}>
+                  <li className={styles.menu_item}>
+                    <a className={styles.menu_heading} href="/">
+                      HOME
+                      <i
+                        className="fa-solid fa-chevron-down"
+                        style={{ fontSize: "15px", paddingLeft: "10px" }}
+                      ></i>
+                    </a>
+                  </li>
+                  <li className={styles.menu_item}>
+                    <a
+                      className={styles.menu_heading}
+                      href="/categories/Categories"
+                    >
+                      CATEGORIES
+                      <i
+                        className="fa-solid fa-chevron-down"
+                        style={{ fontSize: "15px", paddingLeft: "10px" }}
+                      ></i>
+                    </a>
+                    <ul className={styles.sub_menu}>
+                      <li className={styles.sub_menu1}>
+                        <a href="/">Smart Phone & Accessory</a>
+                      </li>
+                      <li className={styles.sub_menu1}>
+                        <a href="/"> Electronic Equipment</a>
+                      </li>
+                      <li className={styles.sub_menu1}>
+                        <a href="/">Laptop</a>
+                      </li>
+                      <li className={styles.sub_menu1}>
+                        <a href="/">Watch</a>
+                      </li>
+                      <li className={styles.sub_menu1}>
+                        <a href="/">
+                        Household Electrical Appliances
+                        </a>
+                      </li>
+                      <li className={styles.sub_menu1}>
+                        <a href="/">Sport & Travel</a>
+                      </li>
+                      <li className={styles.sub_menu1}>
+                        <a href="/">Mom & Babies</a>
+                      </li>
+                      <li className={styles.sub_menu1}>
+                        <a href="/">Home & Lifestyle</a>
+                      </li>
+                      <li className={styles.sub_menu1}>
+                        <a href="/">Beauty Products</a>
+                      </li>
+                      <li className={styles.sub_menu1}>
+                        Healthcare Products
+                        <a href="/"></a>
+                      </li>
+                      <li className={styles.sub_menu1}>
+                        <a href="/">Books</a>
+                      </li>
+                      <li className={styles.sub_menu1}>
+                        <a href="/">Balo & Bags</a>
+                      </li>
+                      <li className={styles.sub_menu1}>
+                        <a href="/"> Pets Care Products</a>
+                      </li>
+                      <li className={styles.sub_menu1}>
+                        <a href="/"> Accessories & Jewelry</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li className={styles.menu_item}>
+                    <a
+                      className={styles.menu_heading}
+                      href="/products/Products"
+                    >
+                      PRODUCTS
+                      <i
+                        className="fa-solid fa-chevron-down"
+                        style={{ fontSize: "15px", paddingLeft: "10px" }}
+                      ></i>
+                    </a>
+                    <ul className={styles.sub_menu}>
+                      <li className={styles.sub_menu1}>
+                        <a href="/">Apple Iphone 14 Pro Max 128GB</a>
+                      </li>
+                      <li className={styles.sub_menu1}>
+                        Điện thoại Samsung Galaxy Z Flip4 5G 128GB
+                        <a href="/"></a>
+                      </li>
+                      <li className={styles.sub_menu1}>
+                        <a href="/">
+                          Tai nghe Samsung Galaxy Buds2 Pro Bluetooth
+                        </a>
+                      </li>
+                      <li className={styles.sub_menu1}>
+                        <a href="/">Loa Bluetooth Di Động LG Xboomgo PL7</a>
+                      </li>
+                      <li className={styles.sub_menu1}>
+                        <a href="/">
+                          Máy giặt lồng ngang LG Inverter 9kg-FM1209S6W
+                        </a>
+                      </li>
+                      <li className={styles.sub_menu1}>
+                        <a href="/">Google Tivi Sony 4K 65 inch KD-65X75K</a>
+                      </li>
+                      <li className={styles.sub_menu1}>
+                        Nồi chiên không dầu Philips HD9270/90-6.2L
+                        <a href="/"></a>
+                      </li>
+                      <li className={styles.sub_menu1}>
+                        <a href="/">Bếp nướng điện Nagakawa NAG3104</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li className={styles.menu_item}>
+                    <a className={styles.menu_heading} href="">
+                      SUPPLIERS
+                      <i
+                        className="fa-solid fa-chevron-down"
+                        style={{ fontSize: "15px", paddingLeft: "10px" }}
+                      ></i>
+                    </a>
+                    <ul className={styles.sub_menu}>
+                      <li className={styles.sub_menu1}>
+                        <a href="/">Samsung</a>
+                      </li>
+                      <li className={styles.sub_menu1}>
+                        <a href="/"> Apple</a>
+                      </li>
+                      <li className={styles.sub_menu1}>
+                        <a href="/">Gucci</a>
+                      </li>
+                      <li className={styles.sub_menu1}>
+                        <a href="/">Louis Vuitton</a>
+                      </li>
+                      <li className={styles.sub_menu1}>
+                        Sharp
+                        <a href="/"></a>
+                      </li>
+                      <li className={styles.sub_menu1}>
+                        <a href="/">Mac</a>
+                      </li>
+                      <li className={styles.sub_menu1}>
+                        <a href="/">Panasonic</a>
+                      </li>
+                      <li className={styles.sub_menu1}>
+                        <a href="/">LG</a>
+                      </li>
+                      <li className={styles.sub_menu1}>
+                        <a href="/">Oppo</a>
+                      </li>
+                      <li className={styles.sub_menu1}>
+                        Dior
+                        <a href="/"></a>
+                      </li>
+                    </ul>
+                  </li>
+                </ul> */}
+                {/* </li>
+                </ul> */}
+              </div>
+              <div className={styles.nav_right}>
+                <a
+                  href="/ordertracking/OrderTracking"
+                  className={styles.nav_order}
+                >
+                  Tract your order
+                </a>
+                <div className={styles.nav_language}>
+                  <i
+                    className="fa-solid fa-globe"
+                    style={{ fontSize: "20px" }}
+                  ></i>
+                  <select className={styles.nav_select}>
+                    <option value="English">English</option>
+                    <option value="Tiếng Việt">Tiếng Việt</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </>
+  );
+}
+
+export async function getStaticProps(context) {
+  const products = await axiosClient.get("/products");
+  const categories = await axiosClient.get("/categories");
+  const suppliers = await axiosClient.get("/suppliers");
+
+  return {
+    props: {
+      products,
+      categories,
+      suppliers,
+    },
+
+    // revalidate: 3600,
+  };
+}
+
+// export async function getStaticProps(context) {
+//   // let page = query.page || 1;
+//   // const category = query.category || "all";
+//   // const sort = query.sort || "";
+//   // const search = query.search || "all";
+//   // const products = await axiosClient.get(
+//   //   `/products?limit=${
+//   //     page * 6
+//   //   }$category=${category}$sort=${sort}$title=${search}`
+//   // );
+//   const products = await axiosClient.get("/products");
+
+//   return {
+//     props: {
+//       products,
+//     },
+
+//     revalidate: 3600,
+//   };
+// }

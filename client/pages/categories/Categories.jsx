@@ -11,23 +11,9 @@ import img11 from "./images/dientuoto.jpeg";
 import img12 from "./images/amthanh.jpeg";
 import img13 from "./images/tulanh.jpeg";
 import img14 from "./images/bepgasale.png";
-import img15 from "./images/mayxay.jpeg";
-import img16 from "./images/bepga.jpeg";
-import img17 from "./images/quat.jpeg";
-import img18 from "./images/noichien.jpeg";
-import img19 from "./images/lonuong.jpeg";
-import img20 from "./images/lovisong.jpeg";
-import img21 from "./images/mayruabat.jpeg";
 import img22 from "./images/sonsale.jpg";
-import img23 from "./images/son.png";
-import img24 from "./images/kemchongnang.jpeg";
-import img25 from "./images/kemlot.jpeg";
-import img26 from "./images/suaruamat.jpeg";
-import img27 from "./images/kemat.jpeg";
-import img28 from "./images/kemay.jpeg";
-import img29 from "./images/phanmat.jpeg";
 import { axiosClient } from "../../libraries/axiosClient";
-import { API_URL } from "../../constants/URL";
+import { API_URL } from "../../constants/URLS";
 
 export default function Categories({ categories, subCategories }) {
   const [tab, setTab] = useState(0);
@@ -82,7 +68,7 @@ export default function Categories({ categories, subCategories }) {
                           className={styles.links_item1}
                           href="/shop/ShopDefault"
                         >
-                          {category.products[tab].name}
+                          {/* {category.products[tab].name} */}
                         </a>
                         <ul className={styles.group_list}>
                           {category.products.map((product, index) => {
@@ -96,9 +82,9 @@ export default function Categories({ categories, subCategories }) {
                                   className={styles.links_item}
                                   href="/shop/ShopDefault"
                                   key={index}
-                                  onClick={() => {
-                                    setTab(index + index);
-                                  }}
+                                  // onClick={() => {
+                                  //   setTab(index + index);
+                                  // }}
                                 >
                                   {product.name}
                                 </a>
@@ -319,13 +305,42 @@ export default function Categories({ categories, subCategories }) {
                   <Image
                     src={img6}
                     alt=""
-                    width={650}
-                    height={295}
+                    width={1200}
+                    height={330}
                     style={{ border: "1px solid #ccc" }}
                   />
                 </div>
-                <div className={styles.block_right}>
-                  <div className={styles.block_menu}>
+                <div className={styles.block_bottom}>
+                  {subCategories.map((category, id) => {
+                    if (id === 1) {
+                      return (
+                        <div className={styles.block_content_bottom}>
+                          {category.products.map((c) => {
+                            return (
+                              <div className={styles.block_menu}>
+                                <a href="/shop/ShopDefault">
+                                  <img
+                                    src={`${API_URL}${c.imageUrl}`}
+                                    alt=""
+                                    width={190}
+                                    height={230}
+                                    style={{
+                                      marginLeft: "22px",
+                                      marginBottom: "20px",
+                                    }}
+                                  />
+                                  <span className={styles.block_name}>
+                                    {c.name}
+                                  </span>
+                                </a>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      );
+                    }
+                  })}
+                  {/* <div className={styles.block_menu}>
                     <a href="/shop/ShopDefault">
                       <Image
                         src={img7}
@@ -352,10 +367,10 @@ export default function Categories({ categories, subCategories }) {
                         Washing Machines
                       </span>
                     </a>
-                  </div>
+                  </div> */}
                 </div>
               </div>
-              <div className={styles.block_content_bottom}>
+              {/* <div className={styles.block_content_bottom}>
                 <div className={styles.block_menu}>
                   <a href="/shop/ShopDefault">
                     <Image
@@ -423,7 +438,7 @@ export default function Categories({ categories, subCategories }) {
                     </span>
                   </a>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
           <div className={styles.container_block}>
@@ -450,103 +465,42 @@ export default function Categories({ categories, subCategories }) {
                   <Image
                     src={img14}
                     alt=""
-                    width={650}
-                    height={295}
+                    width={1200}
+                    height={330}
                     style={{ border: "1px solid #ccc" }}
                   />
                 </div>
-                <div className={styles.block_right}>
-                  <div className={styles.block_menu}>
-                    <a href="/shop/ShopDefault">
-                      <Image
-                        src={img15}
-                        alt=""
-                        width={190}
-                        height={230}
-                        style={{ marginLeft: "22px", marginBottom: "20px" }}
-                      />
-                      <span className={styles.block_name}>Blender</span>
-                    </a>
-                  </div>
-                  <div className={styles.block_menu}>
-                    <a href="/shop/ShopDefault">
-                      <Image
-                        src={img16}
-                        alt=""
-                        width={190}
-                        height={230}
-                        style={{ marginLeft: "22px", marginBottom: "20px" }}
-                      />
-                      <span className={styles.block_name}>Gas Stove</span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div className={styles.block_content_bottom}>
-                <div className={styles.block_menu}>
-                  <a href="/shop/ShopDefault">
-                    <Image
-                      src={img17}
-                      alt=""
-                      width={190}
-                      height={230}
-                      style={{ marginLeft: "22px", marginBottom: "20px" }}
-                    />
-                    <span className={styles.block_name}>Electric Fan</span>
-                  </a>
-                </div>
-                <div className={styles.block_menu}>
-                  <a href="/shop/ShopDefault">
-                    <Image
-                      src={img18}
-                      alt=""
-                      width={190}
-                      height={230}
-                      style={{ marginLeft: "22px", marginBottom: "20px" }}
-                    />
-                    <span className={styles.block_name}>Oil-free Fryer</span>
-                  </a>
-                </div>
-                <div className={styles.block_menu}>
-                  <a href="/shop/ShopDefault">
-                    <Image
-                      src={img19}
-                      alt=""
-                      width={190}
-                      height={230}
-                      style={{ marginLeft: "22px", marginBottom: "20px" }}
-                    />
-                    <span className={styles.block_name}>Griller</span>
-                  </a>
-                </div>
-                <div className={styles.block_menu}>
-                  <a href="/shop/ShopDefault">
-                    <Image
-                      src={img20}
-                      alt=""
-                      width={190}
-                      height={230}
-                      style={{ marginLeft: "22px", marginBottom: "20px" }}
-                    />
-                    <span className={styles.block_name}>Microwave oven</span>
-                  </a>
-                </div>
-                <div className={styles.block_menu}>
-                  <a href="/shop/ShopDefault">
-                    <Image
-                      src={img21}
-                      alt=""
-                      width={190}
-                      height={230}
-                      style={{ marginLeft: "22px", marginBottom: "20px" }}
-                    />
-                    <span
-                      className={styles.block_name}
-                      style={{ paddingLeft: "80px" }}
-                    >
-                      Dishwasher
-                    </span>
-                  </a>
+                <div className={styles.block_bottom}>
+                  {subCategories.map((category, id) => {
+                    if (id === 2) {
+                      // if (id === 4) {
+                      return (
+                        <div className={styles.block_content_bottom}>
+                          {category.products.map((c) => {
+                            return (
+                              <div className={styles.block_menu}>
+                                <a href="/shop/ShopDefault">
+                                  <img
+                                    src={`${API_URL}${c.imageUrl}`}
+                                    alt=""
+                                    width={190}
+                                    height={230}
+                                    style={{
+                                      marginLeft: "22px",
+                                      marginBottom: "20px",
+                                    }}
+                                  />
+                                  <span className={styles.block_name}>
+                                    {c.name}
+                                  </span>
+                                </a>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      );
+                    }
+                  })}
                 </div>
               </div>
             </div>
@@ -573,103 +527,42 @@ export default function Categories({ categories, subCategories }) {
                   <Image
                     src={img22}
                     alt=""
-                    width={650}
-                    height={295}
+                    width={1200}
+                    height={330}
                     style={{ border: "1px solid #ccc" }}
                   />
                 </div>
-                <div className={styles.block_right}>
-                  <div className={styles.block_menu}>
-                    <a href="/shop/ShopDefault">
-                      <Image
-                        src={img23}
-                        alt=""
-                        width={190}
-                        height={230}
-                        style={{ marginLeft: "22px", marginBottom: "20px" }}
-                      />
-                      <span className={styles.block_name}>Lipstick</span>
-                    </a>
-                  </div>
-                  <div className={styles.block_menu}>
-                    <a href="/shop/ShopDefault">
-                      <Image
-                        src={img24}
-                        alt=""
-                        width={190}
-                        height={230}
-                        style={{ marginLeft: "22px", marginBottom: "20px" }}
-                      />
-                      <span className={styles.block_name}>Sunscreen</span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div className={styles.block_content_bottom}>
-                <div className={styles.block_menu}>
-                  <a href="/shop/ShopDefault">
-                    <Image
-                      src={img25}
-                      alt=""
-                      width={190}
-                      height={230}
-                      style={{ marginLeft: "22px", marginBottom: "20px" }}
-                    />
-                    <span className={styles.block_name}>Cream Liner</span>
-                  </a>
-                </div>
-                <div className={styles.block_menu}>
-                  <a href="/shop/ShopDefault">
-                    <Image
-                      src={img26}
-                      alt=""
-                      width={190}
-                      height={230}
-                      style={{ marginLeft: "22px", marginBottom: "20px" }}
-                    />
-                    <span className={styles.block_name}>Cleanser</span>
-                  </a>
-                </div>
-                <div className={styles.block_menu}>
-                  <a href="/shop/ShopDefault">
-                    <Image
-                      src={img27}
-                      alt=""
-                      width={190}
-                      height={230}
-                      style={{ marginLeft: "22px", marginBottom: "20px" }}
-                    />
-                    <span className={styles.block_name}>Toner</span>
-                  </a>
-                </div>
-                <div className={styles.block_menu}>
-                  <a href="/shop/ShopDefault">
-                    <Image
-                      src={img28}
-                      alt=""
-                      width={190}
-                      height={230}
-                      style={{ marginLeft: "22px", marginBottom: "20px" }}
-                    />
-                    <span className={styles.block_name}>Eyeliner</span>
-                  </a>
-                </div>
-                <div className={styles.block_menu}>
-                  <a href="/shop/ShopDefault">
-                    <Image
-                      src={img29}
-                      alt=""
-                      width={190}
-                      height={230}
-                      style={{ marginLeft: "22px", marginBottom: "20px" }}
-                    />
-                    <span
-                      className={styles.block_name}
-                      style={{ paddingLeft: "80px" }}
-                    >
-                      Eyeshadow
-                    </span>
-                  </a>
+                <div className={styles.block_bottom}>
+                  {subCategories.map((category, id) => {
+                    if (id === 4) {
+                      // if (id === 8) {
+                      return (
+                        <div className={styles.block_content_bottom}>
+                          {category.products.map((c) => {
+                            return (
+                              <div className={styles.block_menu}>
+                                <a href="/shop/ShopDefault">
+                                  <img
+                                    src={`${API_URL}${c.imageUrl}`}
+                                    alt=""
+                                    width={190}
+                                    height={230}
+                                    style={{
+                                      marginLeft: "22px",
+                                      marginBottom: "20px",
+                                    }}
+                                  />
+                                  <span className={styles.block_name}>
+                                    {c.name}
+                                  </span>
+                                </a>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      );
+                    }
+                  })}
                 </div>
               </div>
             </div>
@@ -682,7 +575,10 @@ export default function Categories({ categories, subCategories }) {
 
 export async function getStaticProps(context) {
   const categories = await axiosClient.get("/categories");
-  const subCategories = await axiosClient.get("/categories/questions/18");
+  // const subCategories = await axiosClient.get("/categories/questions/18");
+  const subCategories = await axiosClient.get(
+    "/categories/:id/number-products"
+  );
 
   return {
     props: {

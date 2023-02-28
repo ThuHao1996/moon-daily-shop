@@ -25,9 +25,13 @@ router.post("/", (req, res) => {
 
 router.get("/", (req, res) => {
   try {
-    Order.find().then((result) => {
-      res.send(result);
-    });
+    Order.find()
+      .lean({ virtuals: true })
+      .populate("orderDetails.product")
+      .populate("employee")
+      .then((result) => {
+        res.send(result);
+      });
   } catch (error) {
     res.sendStatus(500);
     console.log("Error:", error);

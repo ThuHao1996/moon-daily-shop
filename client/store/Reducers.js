@@ -32,6 +32,11 @@ export const reducers = (state, action) => {
         ...state,
         favourite: action.payload,
       };
+    // case ACTIONS.ADD_CATEGORIES:
+    //   return {
+    //     ...state,
+    //     categories: action.payload,
+    //   };
     default:
       return state;
   }

@@ -1,6 +1,6 @@
 import React from "react";
 import Footer from "./footer/Footer";
-import Navbar from "./navbar/Navbar";
+import Navbar from "../pages/navbar/Navbar";
 import Modal from "./Modal";
 import ModalNotify from "./ModalNotify";
 

@@ -35,6 +35,17 @@ export const DataProvider = ({ children }) => {
     localStorage.setItem("next_favourite", JSON.stringify(favourite));
   }, [favourite]);
 
+  // useEffect(() => {
+  //   getData("categories").then((res) => {
+  //     if (res.err)
+  //       return dispatch({ type: "NOTIFY", payload: { error: res.err } });
+  //     dispatch({
+  //       type: "ADD_CATEGORIES",
+  //       payload: res.categories,
+  //     });
+  //   });
+  // }, []);
+
   return (
     <DataContext.Provider value={{ state, dispatch }}>
       {children}

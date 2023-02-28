@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import Head from "next/head";
 import numeral from "numeral";
 import { axiosClient } from "../../libraries/axiosClient";
-import { API_URL } from "../../constants/URL";
+import { API_URL } from "../../constants/URLS";
 import { Rate } from "antd";
 import { DataContext } from "../../store/GlobalState";
 import { addToCart } from "../../store/Actions";
@@ -237,11 +237,11 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params: { id } }) {
   console.log("id", id);
+  // console.log("params", params);
 
   // const product = await axiosClient(`/products/${params.id}`);
   const product = await axiosClient(`/products/${id}`);
   // console.log("product", product);
-  // console.log("params", params);
   return {
     props: {
       product,
