@@ -16,8 +16,6 @@ import { axiosClient } from "../../libraries/axiosClient";
 import { API_URL } from "../../constants/URLS";
 
 export default function Categories({ categories, subCategories }) {
-  const [tab, setTab] = useState(0);
-
   return (
     <>
       <Head>
@@ -82,9 +80,6 @@ export default function Categories({ categories, subCategories }) {
                                   className={styles.links_item}
                                   href="/shop/ShopDefault"
                                   key={index}
-                                  // onClick={() => {
-                                  //   setTab(index + index);
-                                  // }}
                                 >
                                   {product.name}
                                 </a>

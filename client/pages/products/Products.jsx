@@ -81,63 +81,69 @@ export default function Products({ products }) {
             </a>
           </div>
         </div>
-        <div className={styles.product_container}>
-          {products &&
-            products.map((product) => {
-              return (
-                <div key={product._id} style={{ height: "650px" }}>
-                  <div className="card" style={{ width: "21rem" }}>
-                    <img
-                      src={`${API_URL}/${product.imageUrl}`}
-                      className="card-img-top"
-                      alt=""
-                    />
-                    <div className="card-body">
-                      <h3 className="card-title">{product.name}</h3>
-                      <div className="d-flex justify-content-between mx-0">
-                        <p className={styles.product_price}>
-                          {numeral(product.price).format("0,0$")}
-                        </p>
-                        <div>
-                          {product.stock > 0 ? (
-                            <span className="text-danger">
-                              Stock: {numeral(product.stock).format("0,0.0")}
-                            </span>
-                          ) : (
-                            <span className="text-danger">OutStock</span>
-                          )}
+        <div>
+          <div className={styles.product_container}>
+            {products &&
+              products.map((product) => {
+                return (
+                  <div key={product._id} style={{ height: "650px" }}>
+                    <div className="card" style={{ width: "21rem" }}>
+                      <img
+                        src={`${API_URL}/${product.imageUrl}`}
+                        className="card-img-top"
+                        alt=""
+                      />
+                      <div className="card-body">
+                        <h3 className="card-title">{product.name}</h3>
+                        <div className="d-flex justify-content-between mx-0">
+                          <p className={styles.product_price}>
+                            {numeral(product.price).format("0,0$")}
+                          </p>
+                          <div>
+                            {product.stock > 0 ? (
+                              <span className="text-danger">
+                                Stock: {numeral(product.stock).format("0,0.0")}
+                              </span>
+                            ) : (
+                              <span className="text-danger">OutStock</span>
+                            )}
+                          </div>
                         </div>
-                      </div>
-                      <p style={{ color: "#ed14ed" }}>Sold: {product.sold}</p>
+                        <p style={{ color: "#ed14ed" }}>Sold: {product.sold}</p>
 
-                      <p className="card-text">{product.description}</p>
-                      <div className="d-flex justify-content-between mx-0">
-                        <a
-                          href={`/products/${product._id}`}
-                          className="btn btn-info"
-                          style={{ marginRight: "5px", flex: 1, color: "#fff" }}
-                        >
-                          View
-                        </a>
+                        <p className="card-text">{product.description}</p>
+                        <div className="d-flex justify-content-between mx-0">
+                          <a
+                            href={`/products/${product._id}`}
+                            className="btn btn-info"
+                            style={{
+                              marginRight: "5px",
+                              flex: 1,
+                              color: "#fff",
+                            }}
+                          >
+                            View
+                          </a>
 
-                        <button
-                          key={product._id}
-                          className="btn btn-success"
-                          style={{ marginLeft: "5px", flex: 1 }}
-                          //--------Nếu stock=0 thì vô hiệu hóa button Buy ở dưới--------
-                          disabled={product.stock === 0 ? true : false}
-                          //---------Thêm sản phẩm vào giỏ hàng--------------
-                          onClick={() => dispatch(addToCart(product, cart))}
-                        >
-                          Buy
-                        </button>
-                        {/* {userLink(product._id)} */}
+                          <button
+                            key={product._id}
+                            className="btn btn-success"
+                            style={{ marginLeft: "5px", flex: 1 }}
+                            //--------Nếu stock=0 thì vô hiệu hóa button Buy ở dưới--------
+                            disabled={product.stock === 0 ? true : false}
+                            //---------Thêm sản phẩm vào giỏ hàng--------------
+                            onClick={() => dispatch(addToCart(product, cart))}
+                          >
+                            Buy
+                          </button>
+                          {/* {userLink(product._id)} */}
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
+          </div>
         </div>
       </div>
 

@@ -27,7 +27,7 @@ export default function Home({
   advertisements,
   features,
 }) {
-  console.log("f", features);
+  // console.log("f", features);
 
   const [value, setValue] = useState(4);
 
@@ -92,7 +92,7 @@ export default function Home({
                 </div>
                 <div className="carousel-inner">
                   {slides.map((s, index) => {
-                    console.log("index", index);
+                    // console.log("index", index);
                     if (s.sortOrder === 0) {
                       return (
                         <div className="carousel-item active" key={s._id}>
@@ -184,7 +184,7 @@ export default function Home({
                 {features &&
                   features.map((f) => {
                     return (
-                      <div className={styles.block_item}>
+                      <div className={styles.block_item} key={f._id}>
                         <div className={styles.block_left}>
                           <i
                             className={f.icon}

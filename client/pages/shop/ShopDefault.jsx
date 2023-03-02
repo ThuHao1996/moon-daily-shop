@@ -129,7 +129,7 @@ export default function ShopDefault({
               </a>
             </div>
           </div>
-          <div className={styles.shop_brand}>
+          {/* <div className={styles.shop_brand}>
             {suppliers &&
               suppliers.map((supplier) => {
                 return (
@@ -142,7 +142,7 @@ export default function ShopDefault({
                   </a>
                 );
               })}
-          </div>
+          </div> */}
           <div className={styles.shop_categories}>
             {subCategories &&
               subCategories.map((category) => {
@@ -615,7 +615,7 @@ export default function ShopDefault({
                 {suppliers.map((supplier) => {
                   return (
                     <div key={supplier._id} className={styles.menu_text}>
-                      <a>{supplier.name}</a>
+                      <a href="/suppliers/Suppliers">{supplier.name}</a>
                     </div>
                   );
                 })}

@@ -5,11 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { axiosClient } from "../../libraries/axiosClient";
 import { DataContext } from "../../store/GlobalState";
-import NavbarMenu from "../navbarmenu/NavbarMenu";
-import Search from "../Search";
-
 export default function Navbar({ categories, products, suppliers }) {
-  console.log("categories", categories);
+  // console.log("suppliers", suppliers);
 
   //-----------Set giá trị mặc định cho giỏ hàng------------
   const { state, dispatch } = useContext(DataContext);
@@ -33,9 +30,13 @@ export default function Navbar({ categories, products, suppliers }) {
                 <h1 className={styles.heading}>MOON</h1>
               </div>
               <div className={styles.header_center}>
-                {/* <Search state={state} /> */}
                 <div className={styles.menu_icon}>
-                  <a className={styles.header_name}>Search Products</a>
+                  <a
+                    href="/searchproducts/SearchProducts"
+                    className={styles.header_name}
+                  >
+                    Search Products
+                  </a>
                   <i
                     className="fa-solid fa-chevron-down"
                     style={{
@@ -153,17 +154,16 @@ export default function Navbar({ categories, products, suppliers }) {
                     </a>
                     <ul className={styles.sub_menu}>
                       {categories &&
-                        categories.map((c) => {
-                          console.log("c", c);
+                        categories.map((category) => {
+                          console.log("c", category);
                           return (
-                            <li key={c._id} className={styles.menu_item}>
-                              <a href="">{c.name}</a>
+                            <li key={category._id} className={styles.menu_item}>
+                              <a href="">{category.name}</a>
                             </li>
                           );
                         })}
                     </ul> */}
-                <NavbarMenu />
-                {/* <ul className={styles.menu}>
+                <ul className={styles.menu}>
                   <li className={styles.menu_item}>
                     <a className={styles.menu_heading} href="/">
                       HOME
@@ -198,9 +198,7 @@ export default function Navbar({ categories, products, suppliers }) {
                         <a href="/">Watch</a>
                       </li>
                       <li className={styles.sub_menu1}>
-                        <a href="/">
-                        Household Electrical Appliances
-                        </a>
+                        <a href="/">Household Electrical Appliances</a>
                       </li>
                       <li className={styles.sub_menu1}>
                         <a href="/">Sport & Travel</a>
@@ -277,7 +275,10 @@ export default function Navbar({ categories, products, suppliers }) {
                     </ul>
                   </li>
                   <li className={styles.menu_item}>
-                    <a className={styles.menu_heading} href="">
+                    <a
+                      className={styles.menu_heading}
+                      href="/suppliers/Suppliers"
+                    >
                       SUPPLIERS
                       <i
                         className="fa-solid fa-chevron-down"
@@ -319,7 +320,7 @@ export default function Navbar({ categories, products, suppliers }) {
                       </li>
                     </ul>
                   </li>
-                </ul> */}
+                </ul>
                 {/* </li>
                 </ul> */}
               </div>
@@ -364,6 +365,12 @@ export async function getStaticProps(context) {
     // revalidate: 3600,
   };
 }
+
+// export async function getServerSideProps() {
+//   const suppliers = await axiosClient("/suppliers");
+
+//   return { props: { suppliers } };
+// }
 
 // export async function getStaticProps(context) {
 //   // let page = query.page || 1;
