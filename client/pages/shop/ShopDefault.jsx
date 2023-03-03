@@ -144,7 +144,7 @@ export default function ShopDefault({
               })}
           </div> */}
           <div className={styles.shop_categories}>
-            {subCategories &&
+            {/* {subCategories &&
               subCategories.map((category) => {
                 return (
                   <div className={styles.group_menu} key={category._id}>
@@ -176,8 +176,9 @@ export default function ShopDefault({
                     </div>
                   </div>
                 );
-              })}
-            {/* <div className={styles.group_left}>
+              })} */}
+            <div className={styles.group_menu}>
+              <div className={styles.group_left}>
                 <Image
                   src={img10}
                   alt=""
@@ -185,8 +186,8 @@ export default function ShopDefault({
                   height={120}
                   style={{ padding: "20px 0 0 5px" }}
                 />
-              </div> */}
-            {/* <div className={styles.group_right}>
+              </div>
+              <div className={styles.group_right}>
                 <h3 className={styles.group_heading}>
                   Smart Phone & Accessory
                 </h3>
@@ -212,8 +213,9 @@ export default function ShopDefault({
                     </a>
                   </li>
                 </ul>
-              </div> */}
-            {/* <div className={styles.group_menu}>
+              </div>
+            </div>
+            <div className={styles.group_menu}>
               <div className={styles.group_left}>
                 <Image
                   src={img11}
@@ -466,7 +468,7 @@ export default function ShopDefault({
                   </li>
                 </ul>
               </div>
-            </div> */}
+            </div>
           </div>
           <div className={styles.layout_shop}>
             <h3 className={styles.layout_heading}>Best Sale Item</h3>
@@ -489,7 +491,7 @@ export default function ShopDefault({
                           }}
                         >
                           <div className={styles.layout_thumbnail}>
-                            <a href={`products/${product._id}`}>
+                            <a href={`/products/${product._id}`}>
                               <img
                                 src={`${API_URL}/${product.imageUrl}`}
                                 className="card-img-top"
@@ -612,13 +614,33 @@ export default function ShopDefault({
             <div className={styles.menu_right}>
               <div className={styles.menu_heading}>BY BRANDS</div>
               <div className={styles.menu_content}>
-                {suppliers.map((supplier) => {
+                {/* {suppliers.map((supplier) => {
                   return (
                     <div key={supplier._id} className={styles.menu_text}>
                       <a href="/suppliers/Suppliers">{supplier.name}</a>
                     </div>
                   );
-                })}
+                })} */}
+                <ul className={styles.menu_list}>
+                  <li className={styles.menu_text}>
+                    <a href="/suppliers/Suppliers">SAMSUNG</a>
+                  </li>
+                  <li className={styles.menu_text}>
+                    <a href="/suppliers/Suppliers">DIOR</a>
+                  </li>
+                  <li className={styles.menu_text}>
+                    <a href="/suppliers/Suppliers">SHARP STORE</a>
+                  </li>
+                  <li className={styles.menu_text}>
+                    <a href="/suppliers/Suppliers">APPLE</a>
+                  </li>
+                  <li className={styles.menu_text}>
+                    <a href="/suppliers/Suppliers">OPPO STORE</a>
+                  </li>
+                  <li className={styles.menu_text}>
+                    <a href="/suppliers/Suppliers">CASIO STORE</a>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>

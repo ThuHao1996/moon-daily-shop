@@ -1,10 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import Head from "next/head";
 import styles from "./Login.module.css";
-// import { axiosClient } from "../../libraries/axiosClient";
+import { message } from "antd";
+import { axiosClient } from "../../libraries/axiosClient";
 
 export default function Login() {
-  // const onFinish = (values) => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  function handleLogin(e) {
+    if (e) {
+      e.preventDefault();
+      axiosClient
+        .post("/auth/login-jwt", { username, password })
+        .then((response) => {
+          console.log(response);
+          response.json();
+        })
+        .then((data) => {
+          localStorage.setItem("user", JSON.stringify(data));
+          window.location.href = "/";
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  }
+  // const handleLogin = (values) => {
   //   const { username, password } = values;
   //   axiosClient
   //     .post("/auth/login-jwt", { username, password })
@@ -37,7 +59,7 @@ export default function Login() {
         </div>
         <div className={styles.my_account}>
           <h1 className={styles.account_heading}>LOGIN</h1>
-          <form className={styles.account_form}>
+          <form className={styles.account_form} onSubmit={handleLogin()}>
             <h2 className={styles.account_name}>Log In Your Account</h2>
             <div className={styles.form}>
               <label
@@ -53,6 +75,8 @@ export default function Login() {
               </label>
               <input
                 type="email"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
                 name="email"
                 className="form-control"
                 id="exampleInputEmail1"
@@ -90,6 +114,8 @@ export default function Login() {
               </label>
               <input
                 type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 name="password"
                 className="form-control"
                 id="exampleInputPassword1"

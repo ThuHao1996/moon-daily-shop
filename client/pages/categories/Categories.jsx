@@ -2,6 +2,12 @@ import React, { useState } from "react";
 import Head from "next/head";
 import styles from "./Categories.module.css";
 import Image from "next/image";
+import img from "./images/laptop.jpeg";
+import img1 from "./images/dieuhoa1.jpeg";
+import img2 from "./images/lonuong.jpeg";
+import img3 from "./images/baby.jpeg";
+import img4 from "./images/son3.jpeg";
+import img5 from "./images/tuixach1.jpeg";
 import img6 from "./images/maygiatsale.png";
 import img7 from "./images/dieuhoa.jpeg";
 import img8 from "./images/may giat 1.jpeg";
@@ -36,16 +42,38 @@ export default function Categories({ categories, subCategories }) {
           <div className={styles.container_top}>
             <div className={styles.container_left}>
               <h2 className={styles.container_heading}>CATEGORIES</h2>
-              {categories.map((category) => {
+              <ul className={styles.container_list}>
+                <li className={styles.container_item}>
+                  <a href="/shop/ShopDefault">Smart Phone & Accessory</a>
+                </li>
+                <li className={styles.container_item}>
+                  <a href="/shop/ShopDefault">Electronic Equipment</a>
+                </li>
+                <li className={styles.container_item}>
+                  <a href="/shop/ShopDefault">
+                    Household Electrical Appliances
+                  </a>
+                </li>
+                <li className={styles.container_item}>
+                  <a href="/shop/ShopDefault">Mom & Babies</a>
+                </li>
+                <li className={styles.container_item}>
+                  <a href="/shop/ShopDefault">Beauty Products</a>
+                </li>
+                <li className={styles.container_item}>
+                  <a href="/shop/ShopDefault">Fashion And Accessory</a>
+                </li>
+              </ul>
+              {/* {categories.map((category) => {
                 return (
                   <ul className={styles.container_list} key={category._id}>
                     <li className={styles.container_item}>{category.name}</li>
                   </ul>
                 );
-              })}
+              })} */}
             </div>
             <div className={styles.container_right}>
-              {subCategories.map((category, id) => {
+              {/* {subCategories.map((category, id) => {
                 console.log("category", category);
                 console.log("id", id);
                 return (
@@ -66,8 +94,8 @@ export default function Categories({ categories, subCategories }) {
                           className={styles.links_item1}
                           href="/shop/ShopDefault"
                         >
-                          {/* {category.products[tab].name} */}
-                        </a>
+                         {/* {category.products[tab].name} */}
+              {/* </a>
                         <ul className={styles.group_list}>
                           {category.products.map((product, index) => {
                             console.log("index", index);
@@ -91,9 +119,46 @@ export default function Categories({ categories, subCategories }) {
                     </div>
                   </div>
                 );
-              })}
-
-              {/* <div className={styles.group_menu}>
+              })} */}
+              <div className={styles.group_menu}>
+                <div className={styles.group_left}>
+                  <Image
+                    src={img}
+                    alt=""
+                    width={100}
+                    height={120}
+                    style={{ padding: "20px 0 0 5px" }}
+                  />
+                </div>
+                <div className={styles.group_right}>
+                  <h3 className={styles.group_heading}>
+                    Smart Phone & Accessory
+                  </h3>
+                  <ul className={styles.group_list}>
+                    <li className={styles.group_item}>
+                      <a className={styles.links_item} href="/shop/ShopDefault">
+                        Desktop PC
+                      </a>
+                    </li>
+                    <li className={styles.group_item}>
+                      <a className={styles.links_item} href="/shop/ShopDefault">
+                        Laptop
+                      </a>
+                    </li>
+                    <li className={styles.group_item}>
+                      <a className={styles.links_item} href="/shop/ShopDefault">
+                        Tablet
+                      </a>
+                    </li>
+                    <li className={styles.group_item}>
+                      <a className={styles.links_item} href="/shop/ShopDefault">
+                        Phone
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div className={styles.group_menu}>
                 <div className={styles.group_left}>
                   <Image
                     src={img1}
@@ -250,31 +315,33 @@ export default function Categories({ categories, subCategories }) {
                   />
                 </div>
                 <div className={styles.group_right}>
-                  <h3 className={styles.group_heading}>Healthcare Products</h3>
+                  <h3 className={styles.group_heading}>
+                    Fashion and Accessory
+                  </h3>
                   <ul className={styles.group_list}>
                     <li className={styles.group_item}>
                       <a className={styles.links_item} href="/shop/ShopDefault">
-                        Face Lift Machine
+                        Men's and women's pants
                       </a>
                     </li>
                     <li className={styles.group_item}>
                       <a className={styles.links_item} href="/shop/ShopDefault">
-                        Massage Machine
+                        Branded handbags
                       </a>
                     </li>
                     <li className={styles.group_item}>
                       <a className={styles.links_item} href="/shop/ShopDefault">
-                        Shower Gel
+                        Metal Strap Women's Watch
                       </a>
                     </li>
                     <li className={styles.group_item}>
                       <a className={styles.links_item} href="/shop/ShopDefault">
-                        Exfoliating Pad
+                        Diamond Necklace For Women
                       </a>
                     </li>
                   </ul>
                 </div>
-              </div> */}
+              </div>
             </div>
           </div>
 

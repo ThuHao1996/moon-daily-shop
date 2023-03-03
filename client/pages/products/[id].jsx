@@ -52,6 +52,7 @@ export default function ProductDetails({ product }) {
               style={{ cursor: "pointer", paddingTop: "20px" }}
             >
               {product.images.map((img, index) => {
+                console.log("img", img);
                 return (
                   <img
                     key={index}
