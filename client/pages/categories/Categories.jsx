@@ -89,13 +89,7 @@ export default function Categories({ categories, subCategories }) {
                     </div>
                     <div className={styles.group_right}>
                       <h3 className={styles.group_heading}>{category.name}</h3>
-                      <div className={styles.group_list}>
-                        <a
-                          className={styles.links_item1}
-                          href="/shop/ShopDefault"
-                        >
-                         {/* {category.products[tab].name} */}
-              {/* </a>
+                      <div>
                         <ul className={styles.group_list}>
                           {category.products.map((product, index) => {
                             console.log("index", index);
@@ -344,7 +338,6 @@ export default function Categories({ categories, subCategories }) {
               </div>
             </div>
           </div>
-
           <div className={styles.container_block}>
             <div className={styles.block_header}>
               <h3 className={styles.block_heading}>Electronic Equipment</h3>
@@ -365,6 +358,7 @@ export default function Categories({ categories, subCategories }) {
               <div className={styles.block_content_top}>
                 <div className={styles.block_banner}>
                   <Image
+                    className={styles.mobile_img}
                     src={img6}
                     alt=""
                     width={1200}
@@ -525,6 +519,7 @@ export default function Categories({ categories, subCategories }) {
               <div className={styles.block_content_top}>
                 <div className={styles.block_banner}>
                   <Image
+                    className={styles.mobile_img}
                     src={img14}
                     alt=""
                     width={1200}
@@ -587,6 +582,7 @@ export default function Categories({ categories, subCategories }) {
               <div className={styles.block_content_top}>
                 <div className={styles.block_banner}>
                   <Image
+                    className={styles.mobile_img}
                     src={img22}
                     alt=""
                     width={1200}
@@ -637,10 +633,7 @@ export default function Categories({ categories, subCategories }) {
 
 export async function getStaticProps(context) {
   const categories = await axiosClient.get("/categories");
-  // const subCategories = await axiosClient.get("/categories/questions/18");
-  const subCategories = await axiosClient.get(
-    "/categories/:id/number-products"
-  );
+  const subCategories = await axiosClient.get("/categories/number/products");
 
   return {
     props: {

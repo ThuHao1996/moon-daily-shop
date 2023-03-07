@@ -8,7 +8,6 @@ export const DataProvider = ({ children }) => {
     auth: {},
     cart: [],
     modal: {},
-    // modalfavourite: {},
     favourite: [],
   };
   const [state, dispatch] = useReducer(reducers, initialState);
@@ -34,17 +33,6 @@ export const DataProvider = ({ children }) => {
   useEffect(() => {
     localStorage.setItem("next_favourite", JSON.stringify(favourite));
   }, [favourite]);
-
-  // useEffect(() => {
-  //   getData("categories").then((res) => {
-  //     if (res.err)
-  //       return dispatch({ type: "NOTIFY", payload: { error: res.err } });
-  //     dispatch({
-  //       type: "ADD_CATEGORIES",
-  //       payload: res.categories,
-  //     });
-  //   });
-  // }, []);
 
   return (
     <DataContext.Provider value={{ state, dispatch }}>

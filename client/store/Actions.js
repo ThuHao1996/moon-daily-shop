@@ -4,8 +4,6 @@ export const ACTIONS = {
   ADD_CART: "ADD_CART",
   ADD_MODAL: "ADD_MODAL",
   ADD_FAVOURITE: "ADD_FAVOURITE",
-  // ADD_CATEGORIES: "ADD_CATEGORIES",
-  // ADD_MODALFAVOURITE: "ADD_MODALFAVOURITE",
 };
 
 //-------------Thêm sản phẩm vào giỏ hàng-------------

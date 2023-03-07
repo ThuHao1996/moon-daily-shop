@@ -5,42 +5,26 @@ import { message } from "antd";
 import { axiosClient } from "../../libraries/axiosClient";
 
 export default function Login() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const initialState = {
+    email: "",
+    password: "",
+  };
+  const [memberData, setMemberData] = useState(initialState);
+  const { email, password } = memberData;
 
-  function handleLogin(e) {
-    if (e) {
-      e.preventDefault();
-      axiosClient
-        .post("/auth/login-jwt", { username, password })
-        .then((response) => {
-          console.log(response);
-          response.json();
-        })
-        .then((data) => {
-          localStorage.setItem("user", JSON.stringify(data));
-          window.location.href = "/";
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    }
-  }
-  // const handleLogin = (values) => {
-  //   const { username, password } = values;
-  //   axiosClient
-  //     .post("/auth/login-jwt", { username, password })
-  //     .then((response) => {
-  //       //LOGIN OK
-  //       window.location.href = "/";
-  //       console.log(response.data);
-  //     })
-  //     .catch((err) => {
-  //       if (err.response.status === 401) {
-  //         message.error("Đăng nhập không thành công!");
-  //       }
-  //     });
-  // };
+  const handleChangeInput = (e) => {
+    const { name, value } = e.target;
+    setMemberData({ ...memberData, [name]: value });
+  };
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    console.log(memberData);
+
+    localStorage.setItem("member", JSON.stringify(memberData));
+    message.success("Đăng nhập thành công");
+    window.location.href = "/";
+  };
   return (
     <>
       <Head>
@@ -59,7 +43,7 @@ export default function Login() {
         </div>
         <div className={styles.my_account}>
           <h1 className={styles.account_heading}>LOGIN</h1>
-          <form className={styles.account_form} onSubmit={handleLogin()}>
+          <form className={styles.account_form} onSubmit={handleLogin}>
             <h2 className={styles.account_name}>Log In Your Account</h2>
             <div className={styles.form}>
               <label
@@ -75,10 +59,10 @@ export default function Login() {
               </label>
               <input
                 type="email"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                value={email}
+                onChange={handleChangeInput}
                 name="email"
-                className="form-control"
+                className={`form-control ${styles.mobile_input}`}
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
                 placeholder="Email Address"
@@ -115,9 +99,9 @@ export default function Login() {
               <input
                 type="password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={handleChangeInput}
                 name="password"
-                className="form-control"
+                className={`form-control ${styles.mobile_input}`}
                 id="exampleInputPassword1"
                 placeholder="Password..."
                 style={{
@@ -155,7 +139,7 @@ export default function Login() {
             </div>
             <button
               type="submit"
-              className="btn btn-primary"
+              className={`btn btn-primary ${styles.mobile_input}`}
               style={{
                 height: "50px",
                 outline: "none",

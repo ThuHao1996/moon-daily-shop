@@ -32,29 +32,25 @@ export default function SmartPhoneAccessory({ subCategories }) {
             console.log("id", id);
             if (id === 0) {
               return (
-                <div key={c._id}>
+                <div key={c._id} className={styles.shop_container}>
                   <h3 className={styles.shop_heading}> {c.name}</h3>
                   <div className={styles.shop_label}>5 Products Found</div>
-
                   <div className={styles.shop_product}>
                     {c.products.map((p) => {
                       console.log("p", p);
                       return (
-                        <div
-                          key={p._id}
-                          style={{ height: "500px" }}
-                          className={styles.product_item}
-                        >
+                        <div key={p._id} className={styles.product_item}>
                           <div
                             className="card"
                             style={{
                               width: "18rem",
                               border: "none",
                               height: "90%",
+                              margin: 0,
                             }}
                           >
                             <div className={styles.layout_thumbnail}>
-                              <a href={`products/${p._id}`}>
+                              <a href={`/products/${p._id}`}>
                                 <img
                                   src={`${API_URL}/${p.imageUrl}`}
                                   className="card-img-top"
@@ -117,29 +113,7 @@ export default function SmartPhoneAccessory({ subCategories }) {
 }
 
 export async function getServerSideProps() {
-  const subCategories = await axiosClient("/categories/questions/18");
+  const subCategories = await axiosClient("/categories/number/products");
 
   return { props: { subCategories } };
 }
-
-// export async function getStaticPaths() {
-//   const categories = await axiosClient.get("/categories");
-//   const paths = categories.map((category) => ({
-//     params: { id: category._id },
-//   }));
-
-//   return { paths, fallback: false };
-// }
-
-// export async function getStaticProps({ params: { id } }) {
-//   console.log("id", id);
-
-//   const subCategories = await axiosClient.get("/categories/:id/questions/18");
-
-//   // console.log("params", params);
-//   return {
-//     props: {
-//       subCategories,
-//     },
-//   };
-// }

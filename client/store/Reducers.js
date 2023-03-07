@@ -22,21 +22,11 @@ export const reducers = (state, action) => {
         ...state,
         modal: action.payload,
       };
-    // case ACTIONS.ADD_MODALFAVOURITE:
-    //   return {
-    //     ...state,
-    //     modalfavourite: action.payload,
-    //   };
     case ACTIONS.ADD_FAVOURITE:
       return {
         ...state,
         favourite: action.payload,
       };
-    // case ACTIONS.ADD_CATEGORIES:
-    //   return {
-    //     ...state,
-    //     categories: action.payload,
-    //   };
     default:
       return state;
   }

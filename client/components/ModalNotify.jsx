@@ -1,3 +1,4 @@
+//Cách 1:
 import React, { useContext } from "react";
 import { DataContext } from "../store/GlobalState";
 import Toast from "./Toast";
@@ -19,6 +20,7 @@ export default function ModalNotify() {
   );
 }
 
+//Cách 2:
 // import { useContext, useEffect } from "react";
 // import { DataContext } from "../store/GlobalState";
 
