@@ -34,7 +34,7 @@ export default function Search() {
     e.preventDefault();
     console.log("search", search);
     axiosClient
-      .post("/products/questions/50", { name: search })
+      .post("/products/search/products", { name: search })
       .then((response) => {
         console.log(response);
         setFilterProducts(response);

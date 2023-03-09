@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const { Schema, model } = mongoose;
+const bcrypt = require("bcrypt");
 
 const userSignUpSchema = new Schema({
   email: {
@@ -24,7 +25,8 @@ const userSignUpSchema = new Schema({
     type: String,
     validate: {
       validator: function (value) {
-        return ["Male", "Female", "Other"].includes(value.toUpperCase());
+        console.log(value);
+        return true;
       },
       message: `Gender: {VALUE} is invalid gender!`,
     },
@@ -40,10 +42,21 @@ const userSignUpSchema = new Schema({
       message: `{VALUE} is invalid phone number!`,
     },
     required: [true, "Phone Number is required!"],
-    unique: true,
+    // unique: true,
   },
   address: { type: String, required: false },
 });
 
-const UserSignUp = model("User", userSignUpSchema);
+userSignUpSchema.pre("save", async function (next) {
+  const user = this;
+  if (!user.isModified("password")) {
+    return next();
+  }
+  const salt = await bcrypt.genSalt(10);
+  user.password = await bcrypt.hash(user.password, salt);
+  console.log("user", user);
+  next();
+});
+
+const UserSignUp = model("User", userSignUpSchema, "Users");
 module.exports = UserSignUp;

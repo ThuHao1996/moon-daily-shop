@@ -86,33 +86,34 @@ export default function Home({
                   ></button>
                 </div>
                 <div className="carousel-inner">
-                  {slides.map((s, index) => {
-                    // console.log("index", index);
-                    if (s.sortOrder === 0) {
-                      return (
-                        <div className="carousel-item active" key={s._id}>
-                          <img
-                            src={`${API_URL}/${s.imageUrl}`}
-                            className="d-block"
-                            alt=""
-                            style={{ height: "450px", width: "100%" }}
-                          />
-                        </div>
-                      );
-                    }
-                    if (s.sortOrder !== 0) {
-                      return (
-                        <div className="carousel-item" key={s._id}>
-                          <img
-                            src={`${API_URL}/${s.imageUrl}`}
-                            className="d-block"
-                            alt=""
-                            style={{ height: "450px", width: "100%" }}
-                          />
-                        </div>
-                      );
-                    }
-                  })}
+                  {slides &&
+                    slides.map((s, index) => {
+                      // console.log("index", index);
+                      if (s.sortOrder === 0) {
+                        return (
+                          <div className="carousel-item active" key={s._id}>
+                            <img
+                              src={`${API_URL}/${s.imageUrl}`}
+                              className="d-block"
+                              alt=""
+                              style={{ height: "450px", width: "100%" }}
+                            />
+                          </div>
+                        );
+                      }
+                      if (s.sortOrder !== 0) {
+                        return (
+                          <div className="carousel-item" key={s._id}>
+                            <img
+                              src={`${API_URL}/${s.imageUrl}`}
+                              className="d-block"
+                              alt=""
+                              style={{ height: "450px", width: "100%" }}
+                            />
+                          </div>
+                        );
+                      }
+                    })}
 
                   <div className="carousel-caption d-none d-md-block">
                     <button className={styles.carousel_button}>
@@ -172,32 +173,33 @@ export default function Home({
             <div className={styles.banner_left}>
               <div id="demo" className="carousel slide" data-ride="carousel">
                 <div className="carousel-inner">
-                  {slides.map((s) => {
-                    if (s.sortOrder === 0) {
-                      return (
-                        <div className="carousel-item active" key={s._id}>
-                          <img
-                            src={`${API_URL}/${s.imageUrl}`}
-                            className="d-block"
-                            alt=""
-                            style={{ height: "215px", width: "100%" }}
-                          />
-                        </div>
-                      );
-                    }
-                    if (s.sortOrder !== 0) {
-                      return (
-                        <div className="carousel-item" key={s._id}>
-                          <img
-                            src={`${API_URL}/${s.imageUrl}`}
-                            className="d-block"
-                            alt=""
-                            style={{ height: "215px", width: "100%" }}
-                          />
-                        </div>
-                      );
-                    }
-                  })}
+                  {slides &&
+                    slides.map((s) => {
+                      if (s.sortOrder === 0) {
+                        return (
+                          <div className="carousel-item active" key={s._id}>
+                            <img
+                              src={`${API_URL}/${s.imageUrl}`}
+                              className="d-block"
+                              alt=""
+                              style={{ height: "215px", width: "100%" }}
+                            />
+                          </div>
+                        );
+                      }
+                      if (s.sortOrder !== 0) {
+                        return (
+                          <div className="carousel-item" key={s._id}>
+                            <img
+                              src={`${API_URL}/${s.imageUrl}`}
+                              className="d-block"
+                              alt=""
+                              style={{ height: "215px", width: "100%" }}
+                            />
+                          </div>
+                        );
+                      }
+                    })}
                   <div className="carousel-caption d-md-block">
                     <button className={styles.carousel_button}>
                       <a href="/shop/ShopDefault">SHOP NOW</a>
@@ -324,140 +326,151 @@ export default function Home({
           </div>
           {/* End */}
           <div className={styles.deal_content}>
-            {products.map((product) => {
-              if (product.dealOfTheDay === true) {
-                return (
-                  <div key={product._id} style={{ height: "490px" }}>
-                    <div
-                      className="card"
-                      style={{ width: "20rem", border: "none", height: "100%" }}
-                    >
-                      <div className={styles.deal_thumbnail}>
-                        <a href={`products/${product._id}`}>
-                          <img
-                            src={`${API_URL}/${product.imageUrl}`}
-                            className="card-img-top"
-                            alt=""
-                            style={{
-                              width: "200px",
-                              height: "200px",
-                              marginLeft: "35px",
-                            }}
-                          />
-                        </a>
-                        <div className={styles.deal_discount}>
-                          - {product.discount} %
-                        </div>
-                      </div>
-                      <div
-                        className="card-body"
-                        style={{ backgroundColor: "#fff" }}
-                      >
-                        <a
-                          href="/shop/ShopDefault"
-                          className={styles.deal_shop}
-                        >
-                          YOUNG SHOP
-                        </a>
-                        <div className={styles.deal_list}>
-                          <p className={styles.deal_item1}>
-                            {numeral(product.price).format("0,0$")}
-                          </p>
-                          <div className={styles.deal_item2}>
-                            {product.stock > 0 ? (
-                              <p>Stock: {product.stock}</p>
-                            ) : (
-                              <p>Out Stock</p>
-                            )}
-                          </div>
-                        </div>
-                        <a
-                          href={`/products/${product._id}`}
-                          className="card-title"
-                          style={{ fontSize: "22px", display: "block" }}
-                        >
-                          {product.name}
-                        </a>
-                        <Rate onChange={setValue} value={value} />
-                        <p className={styles.deal_sold}>Sold: {product.sold}</p>
-                      </div>
-                    </div>
-                  </div>
-                );
-              }
-            })}
-          </div>
-        </div>
-        <div className={styles.home_categories}>
-          <h3 className={styles.categories_header}>Top Categories</h3>
-          <div className="row">
-            {categories.map((category) => {
-              return (
-                <div
-                  className="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6"
-                  key={category._id}
-                >
-                  <a
-                    href="/shop/ShopDefault"
-                    className={styles.categories_card}
-                    style={{ height: "250px" }}
-                  >
-                    <img
-                      src={`${API_URL}/${category.imageUrl}`}
-                      className={`card-img-top ${styles.mobile_img}`}
-                      alt=""
-                      style={{
-                        width: "155px",
-                        height: "155px",
-                        marginTop: "15px",
-                        marginLeft: "48px",
-                      }}
-                    />
-                    <h5 className={styles.categories_title}>{category.name}</h5>
-                  </a>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-        <div className={styles.hot_product}>
-          <h3 className={styles.hot_heading}>Hot New Arrivals</h3>
-          <div className={styles.hot_container}>
-            <div className="row">
-              {products.map((p) => {
-                if (p.newArrival === true) {
+            {products &&
+              products.map((product) => {
+                if (product.dealOfTheDay === true) {
                   return (
-                    <div
-                      key={p._id}
-                      className="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12"
-                      style={{ margin: "40px 0" }}
-                    >
-                      <div className={styles.hot_list}>
-                        <div className={styles.hot_left}>
-                          <a href={`products/${p._id}`}>
+                    <div key={product._id} style={{ height: "490px" }}>
+                      <div
+                        className="card"
+                        style={{
+                          width: "20rem",
+                          border: "none",
+                          height: "100%",
+                        }}
+                      >
+                        <div className={styles.deal_thumbnail}>
+                          <a href={`products/${product._id}`}>
                             <img
-                              src={`${API_URL}/${p.imageUrl}`}
+                              src={`${API_URL}/${product.imageUrl}`}
+                              className="card-img-top"
                               alt=""
                               style={{
-                                width: "100px",
-                                height: "100px",
+                                width: "200px",
+                                height: "200px",
                                 marginLeft: "35px",
                               }}
                             />
                           </a>
-                        </div>
-                        <div className={styles.hot_right}>
-                          <div className={styles.hot_name}>
-                            <a href={`products/${p._id}`}>{p.name}</a>
+                          <div className={styles.deal_discount}>
+                            - {product.discount} %
                           </div>
+                        </div>
+                        <div
+                          className="card-body"
+                          style={{ backgroundColor: "#fff" }}
+                        >
+                          <a
+                            href="/shop/ShopDefault"
+                            className={styles.deal_shop}
+                          >
+                            YOUNG SHOP
+                          </a>
+                          <div className={styles.deal_list}>
+                            <p className={styles.deal_item1}>
+                              {numeral(product.price).format("0,0$")}
+                            </p>
+                            <div className={styles.deal_item2}>
+                              {product.stock > 0 ? (
+                                <p>Stock: {product.stock}</p>
+                              ) : (
+                                <p>Out Stock</p>
+                              )}
+                            </div>
+                          </div>
+                          <a
+                            href={`/products/${product._id}`}
+                            className="card-title"
+                            style={{ fontSize: "22px", display: "block" }}
+                          >
+                            {product.name}
+                          </a>
                           <Rate onChange={setValue} value={value} />
-                          <div>{numeral(p.price).format("0,0$")}</div>
+                          <p className={styles.deal_sold}>
+                            Sold: {product.sold}
+                          </p>
                         </div>
                       </div>
                     </div>
                   );
                 }
               })}
+          </div>
+        </div>
+        <div className={styles.home_categories}>
+          <h3 className={styles.categories_header}>Top Categories</h3>
+          <div className="row">
+            {categories &&
+              categories.map((category) => {
+                return (
+                  <div
+                    className="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6"
+                    key={category._id}
+                  >
+                    <a
+                      href="/shop/ShopDefault"
+                      className={styles.categories_card}
+                      style={{ height: "250px" }}
+                    >
+                      <img
+                        src={`${API_URL}/${category.imageUrl}`}
+                        className={`card-img-top ${styles.mobile_img}`}
+                        alt=""
+                        style={{
+                          width: "155px",
+                          height: "155px",
+                          marginTop: "15px",
+                          marginLeft: "48px",
+                        }}
+                      />
+                      <h5 className={styles.categories_title}>
+                        {category.name}
+                      </h5>
+                    </a>
+                  </div>
+                );
+              })}
+          </div>
+        </div>
+        <div className={styles.hot_product}>
+          <h3 className={styles.hot_heading}>Hot New Arrivals</h3>
+          <div className={styles.hot_container}>
+            <div className="row">
+              {products &&
+                products.map((p) => {
+                  if (p.newArrival === true) {
+                    return (
+                      <div
+                        key={p._id}
+                        className="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-12"
+                        style={{ margin: "40px 0" }}
+                      >
+                        <div className={styles.hot_list}>
+                          <div className={styles.hot_left}>
+                            <a href={`products/${p._id}`}>
+                              <img
+                                src={`${API_URL}/${p.imageUrl}`}
+                                alt=""
+                                style={{
+                                  width: "100px",
+                                  height: "100px",
+                                  marginLeft: "35px",
+                                }}
+                              />
+                            </a>
+                          </div>
+                          <div className={styles.hot_right}>
+                            <div className={styles.hot_name}>
+                              <a href={`products/${p._id}`}>{p.name}</a>
+                            </div>
+                            <Rate onChange={setValue} value={value} />
+                            <div>{numeral(p.price).format("0,0$")}</div>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  }
+                })}
             </div>
           </div>
         </div>

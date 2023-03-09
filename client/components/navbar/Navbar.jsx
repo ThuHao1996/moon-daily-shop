@@ -1,16 +1,35 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import styles from "./Navbar.module.css";
 import img from "./images/shopping-cart.png";
 import Image from "next/image";
 import Link from "next/link";
 import { axiosClient } from "../../libraries/axiosClient";
 import { DataContext } from "../../store/GlobalState";
+import Autocomplete from "react-autocomplete";
+import { useSession, signOut } from "next-auth/react";
+
 export default function Navbar() {
   //-----------Set giá trị mặc định cho giỏ hàng------------
+  const { data, status } = useSession();
   const { state } = useContext(DataContext);
   const { cart } = state;
   const { favourite } = state;
-
+  const [search, setSearch] = useState("");
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [filterProducts, setFilterProducts] = useState([]);
+  const handleSelectProduct = (value, product) => {
+    setSearch(value);
+    setSelectedProduct(product);
+  };
+  const handleSearch = (e) => {
+    e.preventDefault();
+    axiosClient
+      .post("/products/search/products", { name: search })
+      .then((response) => {
+        console.log(response);
+        setFilterProducts(response);
+      });
+  };
   return (
     <>
       <div className={styles.navbar}>
@@ -31,7 +50,7 @@ export default function Navbar() {
                 </h1>
               </div>
               <div className={styles.header_center_PC}>
-                <div className={styles.menu_icon}>
+                {/* <div className={styles.menu_icon}>
                   <a
                     href="/searchproducts/SearchProducts"
                     className={styles.header_name}
@@ -75,7 +94,54 @@ export default function Navbar() {
                       Fashion And Accessory
                     </a>
                   </li>
-                </ul>
+                </ul> */}
+                <form
+                  onSubmit={handleSearch}
+                  style={{ border: "none", height: "100%" }}
+                  action="/searchproducts/SearchProducts"
+                  method="get"
+                >
+                  <div
+                    className={styles.form_content_PC}
+                    style={{ display: "flex", height: "100%" }}
+                  >
+                    <Autocomplete
+                      items={filterProducts}
+                      getItemValue={(product) => product.name}
+                      renderItem={(product) => <div>{product.name}</div>}
+                      value={search}
+                      onChange={(e) => setSearch(e.target.value)}
+                      onSelect={handleSelectProduct}
+                      inputProps={{
+                        style: {
+                          color: "green",
+                          border: "none",
+                          outline: "none",
+                          fontSize: "24px",
+                          paddingLeft: "20px",
+                        },
+                      }}
+                      wrapperStyle={{
+                        border: "1px solid #888484",
+                        width: "100%",
+                      }}
+                      className={styles.mobile_form}
+                    />
+
+                    <button
+                      type="submit"
+                      className={styles.form_button}
+                      style={{
+                        width: "11%",
+                        border: "none",
+                        backgroundColor: "blue",
+                        color: "#fff",
+                      }}
+                    >
+                      Search
+                    </button>
+                  </div>
+                </form>
               </div>
               <div className={styles.header_right_PC}>
                 <div className={styles.header_actions}>
@@ -120,8 +186,17 @@ export default function Navbar() {
                       ></i>
                     </div>
                     <div className={styles.user_right}>
-                      <Link href="/login/Login">LOGIN</Link>
-                      <Link href="/register/Register">REGISTER</Link>
+                      {data && data.user ? (
+                        <>
+                          <button onClick={() => signOut()}>LogOut</button>
+                          <span>{data.user.username}</span>
+                        </>
+                      ) : (
+                        <>
+                          <Link href="/login/Login">LOGIN</Link>
+                          <Link href="/register/Register">REGISTER</Link>
+                        </>
+                      )}
                     </div>
                   </div>
                 </div>

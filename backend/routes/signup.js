@@ -8,6 +8,8 @@ mongoose.connect("mongodb://127.0.0.1:27017/Moon-Daily");
 router.post("/", (req, res) => {
   try {
     const data = req.body;
+    data["gender"] = "Male";
+    data["phoneNumber"] = "8423455789";
     const newItem = new UserSignUp(data);
     newItem
       .save()
@@ -15,11 +17,12 @@ router.post("/", (req, res) => {
         res.send(result);
       })
       .catch((err) => {
+        console.log("error", err);
         res.status(400).send(err);
       });
   } catch (error) {
+    console.log("error", error);
     res.sendStatus(500);
-    console.log(error);
   }
 });
 

@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import Head from "next/head";
 import styles from "./Login.module.css";
-import { message } from "antd";
-import { axiosClient } from "../../libraries/axiosClient";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/router";
 
 export default function Login() {
+  const router = useRouter();
   const initialState = {
     email: "",
     password: "",
@@ -13,18 +14,43 @@ export default function Login() {
   const { email, password } = memberData;
 
   const handleChangeInput = (e) => {
-    const { name, value } = e.target;
-    setMemberData({ ...memberData, [name]: value });
+    switch (e.target.name) {
+      case "email":
+        setMemberData({ ...memberData, email: e.target.value });
+        break;
+      case "password":
+        setMemberData({ ...memberData, password: e.target.value });
+        break;
+
+      default:
+        break;
+    }
   };
 
   const handleLogin = (e) => {
     e.preventDefault();
-    console.log(memberData);
+    e.stopPropagation();
 
-    localStorage.setItem("member", JSON.stringify(memberData));
-    message.success("Đăng nhập thành công");
-    window.location.href = "/";
+    signIn("credentials", {
+      email,
+      password,
+      callbackUrl: "http://localhost:3000/",
+      redirect: false,
+    }).then(function (result) {
+      if (result.error !== null) {
+        if (result.status === 401) {
+          console.log(
+            "Your username/password combination was incorrect. Please try again"
+          );
+        } else {
+          console.log(result.error);
+        }
+      } else {
+        router.push(result.url);
+      }
+    });
   };
+
   return (
     <>
       <Head>
