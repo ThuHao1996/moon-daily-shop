@@ -32,6 +32,7 @@ export default function Register() {
         //SignIn is successfully
         // window.location.href = '/login/Login';
         console.log(response.data);
+        localStorage.setItem("user", JSON.stringify(userData));
         message.success("Đăng ký thành công!");
         router.push("/");
       })

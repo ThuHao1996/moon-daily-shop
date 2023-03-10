@@ -31,6 +31,7 @@ export default function Login() {
   const handleLogin = (e) => {
     e.preventDefault();
     e.stopPropagation();
+    localStorage.setItem("member", JSON.stringify(memberData));
     message.success("Đăng nhập thành công!");
     signIn("credentials", {
       email,
