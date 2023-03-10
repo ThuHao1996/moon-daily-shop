@@ -59,6 +59,8 @@ export default function Suppliers({ subSuppliers }) {
                           <img
                             src={`${API_URL}${product.imageUrl}`}
                             alt=""
+                            width={200}
+                            height={100}
                             style={{ marginTop: "20px" }}
                           />
                           <h3 className={styles.product_name}>
@@ -86,7 +88,7 @@ export default function Suppliers({ subSuppliers }) {
 }
 
 export async function getStaticProps(context) {
-  const subSuppliers = await axiosClient.get("/suppliers/number/products");
+  const subSuppliers = await axiosClient.get("/suppliers/number-products");
 
   return {
     props: {

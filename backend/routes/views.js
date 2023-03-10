@@ -1,13 +1,14 @@
 const { default: mongoose } = require("mongoose");
-const { Product, Category } = require("../models");
+const { View } = require("../models");
 var express = require("express");
 var router = express.Router();
 
 mongoose.connect("mongodb://127.0.0.1:27017/Moon-Daily");
+
 router.post("/", (req, res) => {
   try {
     const data = req.body;
-    const newItem = new Product(data);
+    const newItem = new View(data);
     newItem
       .save()
       .then((result) => {
@@ -18,21 +19,16 @@ router.post("/", (req, res) => {
       });
   } catch (error) {
     res.sendStatus(500);
-    console.log(error);
+    console.log("Error:", error);
   }
 });
 
 router.get("/", (req, res) => {
   try {
-    Product.find()
-      .populate("category")
-      .populate("supplier")
-      .populate("subcategory")
-      .populate("createdby")
-      .populate("updatedby")
-      .then((result) => {
-        res.send(result);
-      });
+    View.find()
+    .then((result) => {
+      res.send(result);
+    });
   } catch (error) {
     res.sendStatus(500);
     console.log("Error:", error);
@@ -43,7 +39,7 @@ router.patch("/:id", (req, res) => {
   try {
     const { id } = req.params;
     const data = req.body;
-    Product.findByIdAndUpdate(id, data, { new: true })
+    View.findByIdAndUpdate(id, data, { new: true })
       .then((result) => {
         res.send(result);
       })
@@ -59,7 +55,7 @@ router.patch("/:id", (req, res) => {
 router.delete("/:id", (req, res) => {
   try {
     const { id } = req.params;
-    Product.findByIdAndDelete(id)
+    View.findByIdAndDelete(id)
       .then((result) => {
         res.send(result);
       })
@@ -71,35 +67,4 @@ router.delete("/:id", (req, res) => {
     console.log("Error:", error);
   }
 });
-
-router.get("/:id", function (req, res, next) {
-  try {
-    const { id } = req.params;
-    Product.findById(id)
-      .populate("category")
-      .populate("supplier")
-      .populate("subcategory")
-      .populate("createdby")
-      .populate("updatedby")
-      .then((result) => {
-        res.send(result);
-      });
-  } catch (err) {
-    res.sendStatus(500);
-  }
-});
-
-//----------------------------------------------------------
-router.post("/search/products", async (req, res) => {
-  const { name } = req.body;
-  const query = { name: { $regex: new RegExp(name, "i", "+") } };
-  try {
-    Product.find(query).then((result) => {
-      res.send(result);
-    });
-  } catch (err) {
-    res.sendStatus(500);
-  }
-});
-
 module.exports = router;

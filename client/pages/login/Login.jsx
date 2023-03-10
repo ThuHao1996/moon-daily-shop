@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Head from "next/head";
 import styles from "./Login.module.css";
 import { signIn } from "next-auth/react";
+import { message } from "antd";
 import { useRouter } from "next/router";
 
 export default function Login() {
@@ -30,7 +31,7 @@ export default function Login() {
   const handleLogin = (e) => {
     e.preventDefault();
     e.stopPropagation();
-
+    message.success("Đăng nhập thành công!");
     signIn("credentials", {
       email,
       password,
@@ -192,15 +193,3 @@ export default function Login() {
     </>
   );
 }
-
-// export async function getStaticProps(context) {
-//   const auth = await axiosClient.post("/auth/login-jwt");
-
-//   return {
-//     props: {
-//       auth,
-//     },
-
-//     revalidate: 3600,
-//   };
-// }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Head from "next/head";
 import styles from "./Categories.module.css";
 import Image from "next/image";
@@ -633,7 +633,7 @@ export default function Categories({ categories, subCategories }) {
 
 export async function getStaticProps(context) {
   const categories = await axiosClient.get("/categories");
-  const subCategories = await axiosClient.get("/categories/number/products");
+  const subCategories = await axiosClient.get("/categories/number-products");
 
   return {
     props: {

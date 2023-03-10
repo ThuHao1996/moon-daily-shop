@@ -9,12 +9,15 @@ export default function Register() {
   const router = useRouter();
   const initialState = {
     username: "",
+    gender: "",
+    phoneNumber: "",
     email: "",
     password: "",
     confirm_password: "",
   };
   const [userData, setUserData] = useState(initialState);
-  const { username, email, password, confirm_password } = userData;
+  const { username, gender, phoneNumber, email, password, confirm_password } =
+    userData;
 
   const handleChangeInput = (e) => {
     const { name, value } = e.target;
@@ -29,11 +32,12 @@ export default function Register() {
         //SignIn is successfully
         // window.location.href = '/login/Login';
         console.log(response.data);
+        message.success("Đăng ký thành công!");
         router.push("/");
       })
       .catch((err) => {
         if (err.response.status === 401) {
-          message.error("Đăng ky không thành công!");
+          message.error("Đăng ký không thành công!");
         }
       });
     //
@@ -75,6 +79,71 @@ export default function Register() {
                 id="name"
                 name="username"
                 value={username}
+                onChange={handleChangeInput}
+                style={{
+                  height: "50px",
+                  outline: "none",
+                  border: "none",
+                  border: "1px solid #ccc",
+                  fontSize: "16px",
+                  paddingLeft: "14px",
+                  marginBottom: "20px",
+                  width: "380px",
+                }}
+              />
+            </div>
+            <div className={styles.form}>
+              <label
+                htmlFor="gender"
+                className="form-label"
+                style={{
+                  color: "#3a3737",
+                  fontSize: "18px",
+                  paddingBottom: "4px",
+                }}
+              >
+                Gender
+              </label>
+              <select
+                id="gender"
+                name="gender"
+                value={gender}
+                onChange={handleChangeInput}
+                className={styles.mobile_form}
+                style={{
+                  height: "50px",
+                  outline: "none",
+                  border: "none",
+                  border: "1px solid #ccc",
+                  fontSize: "16px",
+                  paddingLeft: "14px",
+                  marginBottom: "20px",
+                  width: "380px",
+                }}
+              >
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Orther</option>
+              </select>
+            </div>
+            <div className={styles.form}>
+              <label
+                htmlFor="phoneNumber"
+                className="form-label"
+                style={{
+                  color: "#3a3737",
+                  fontSize: "18px",
+                  paddingBottom: "4px",
+                }}
+              >
+                Phone Number
+              </label>
+              <input
+                type="text"
+                className={`form-control ${styles.mobile_form}`}
+                id="name"
+                name="phoneNumber"
+                value={phoneNumber}
                 onChange={handleChangeInput}
                 style={{
                   height: "50px",

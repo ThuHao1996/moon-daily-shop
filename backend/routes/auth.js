@@ -1,16 +1,20 @@
 var express = require("express");
 var router = express.Router();
 const yup = require("yup");
+//--------------------------------------------
 const { default: mongoose } = require("mongoose");
 const { UserSignUp } = require("../models");
 const bcrypt = require("bcrypt");
+//--------------------------------------------
 const { validateSchema } = require("../schemas");
 //import passport và jwt để làm authentication:
 var passport = require("passport");
 var jwt = require("jsonwebtoken");
 const jwtSettings = require("../constants/jwtSettings");
 const { findDocuments, findDocument } = require("../helpers/MongoDBHelper");
+//----------------------------------------------------------
 mongoose.connect("mongodb://127.0.0.1:27017/Moon-Daily");
+//-----------------------------------------------------------
 
 //Login validate: data user đưa lên có đúng với kiểu đã được định nghĩa hay không:
 const loginSchema = yup.object({
@@ -52,6 +56,7 @@ router.post(
   async (req, res, next) => {
     const email = req.body.email;
     const password = req.body.password;
+    //------------------------------------------------------
     const user = await UserSignUp.findOne({ email: email });
 
     if (user) {
@@ -71,6 +76,7 @@ router.post(
         },
         application: "ecommerce",
       };
+      //---------------------------------------------------------
 
       var secret = jwtSettings.SECRET;
       var token = jwt.sign(payload, secret, {

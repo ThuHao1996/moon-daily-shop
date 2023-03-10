@@ -113,7 +113,7 @@ export default function BeautyProducts({ subCategories }) {
 }
 
 export async function getServerSideProps() {
-  const subCategories = await axiosClient("/categories/number/products");
+  const subCategories = await axiosClient("/categories/number-products");
 
   return { props: { subCategories } };
 }
